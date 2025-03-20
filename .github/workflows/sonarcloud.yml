@@ -1,9 +1,9 @@
 name: SonarCloud Analysis
 on:
   push:
-    branches: [ main, master ]
-  pull_request_target:  # 使用 pull_request_target 而非 pull_request
-    branches: [ main, master ]
+    branches: [ main ]
+  pull_request_target:
+    branches: [ main ]
     types: [opened, synchronize, reopened]
 
 jobs:
@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}  # 检出 PR 的代码
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       
       - name: SonarCloud Scan
