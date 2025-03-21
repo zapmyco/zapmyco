@@ -102,7 +102,7 @@ RUN set -ex \
         libxext6=2:1.3.4-1+b1 \
         libgl1=1.6.0-1 \
         libcurl4=7.88.1-10+deb12u8 \
-        curl=7.88.1-10+deb12u8 \
+        curl=7.88.1-10+deb12u12 \
         ca-certificates=20230311 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -140,7 +140,7 @@ RUN apt-get update -o Acquire::http::No-Cache=True -o Acquire::Check-Valid-Until
     apt-get install -y --no-install-recommends \
     debian-archive-keyring=2023.3+deb12u1 \
     apt-transport-https=2.6.1 \
-    curl=7.88.1-10+deb12u8 \
+    curl=7.88.1-10+deb12u12 \
     ca-certificates=20230311 \
     gnupg=2.2.40-1.1 \
     && curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg \
