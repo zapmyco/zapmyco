@@ -53,10 +53,12 @@
     "vitest": "^3.0.7"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "nextra": "^2.2.14",
-    "nextra-theme-docs": "^2.2.14",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "next": "^14.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
   }
 }
