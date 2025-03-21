@@ -21,7 +21,7 @@ RUN set -ex \
     && apt-get update -o Acquire::http::No-Cache=True -o Acquire::Check-Valid-Until=false \
     && apt-get install -y --no-install-recommends \
         build-essential=12.9 \
-        curl=7.88.1-10+deb12u8 \
+        curl=7.88.1-10+deb12u12 \
         ca-certificates=20230311 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
