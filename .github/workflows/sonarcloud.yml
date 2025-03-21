@@ -1,11 +1,9 @@
 name: SonarCloud Analysis
 
 on:
-  # 对内部分支的推送使用正常流程
   push:
     branches: [main]
   
-  # 对 PR 使用两阶段流程
   pull_request_target:
     branches: [main]
     types: [opened, synchronize, reopened]
