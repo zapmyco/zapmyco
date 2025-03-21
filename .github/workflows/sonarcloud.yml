@@ -36,7 +36,6 @@ jobs:
         run: |
           echo "::warning::This PR modifies workflow files or dependencies and requires manual review"
           echo "Automated security checks cannot guarantee safety of these changes"
-          # 不立即失败，但会在日志中标记警告
 
   sonarcloud:
     name: SonarCloud Analysis
