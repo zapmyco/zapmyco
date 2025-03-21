@@ -39,22 +39,5 @@
     "react-dom": "workspace:*",
     "clsx": "workspace:*",
     "home-assistant-js-websocket": "workspace:*"
-  },
-  "devDependencies": {
-    "vitest": "workspace:*",
-    "jsdom": "workspace:*",
-    "eslint": "workspace:*",
-    "vite": "workspace:*",
-    "typescript": "workspace:*",
-    "postcss": "workspace:*",
-    "prettier": "workspace:*",
-    "prettier-plugin-tailwindcss": "workspace:*",
-    "tailwindcss": "workspace:*",
-    "typescript-eslint": "workspace:*",
-    "autoprefixer": "workspace:*",
-    "eslint-config-prettier": "workspace:*",
-    "eslint-plugin-prettier": "workspace:*",
-    "eslint-plugin-react-hooks": "workspace:*",
-    "eslint-plugin-react-refresh": "workspace:*"
   }
 }
