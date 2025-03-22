@@ -1,7 +1,7 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { join } from 'path';
+import path from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
@@ -40,7 +40,8 @@ export default defineConfig(() => ({
   },
   resolve: {
     alias: {
-      '@zapmyco/ui': join(__dirname, '../../packages/ui/src/index.ts'),
+      '@zapmyco/ui': path.join(__dirname, '../../packages/ui/src/index.ts'),
+      '@': path.resolve(__dirname, './src'),
     },
   },
 }));
