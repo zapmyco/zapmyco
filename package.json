@@ -2,9 +2,9 @@
   "name": "zapmyco",
   "scripts": {
     "dev": "nx dev frontend",
-    "build": "nx build",
-    "build:frontend": "nx build frontend",
-    "build:ui": "nx build ui",
+    "build": "nx run-many --target=build --projects=ui,frontend --skip-nx-cache",
+    "build:frontend": "nx build frontend --skip-nx-cache",
+    "build:ui": "nx build ui --skip-nx-cache",
     "lint": "nx lint frontend",
     "test": "nx test frontend",
     "test:watch": "nx test frontend --watch",
