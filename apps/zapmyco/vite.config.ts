@@ -5,7 +5,7 @@ import { join } from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/apps/frontend',
+  cacheDir: '../../node_modules/.vite/apps/zapmyco',
   server: {
     port: 4200,
     host: 'localhost',
