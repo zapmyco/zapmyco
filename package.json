@@ -6,15 +6,12 @@
     "build:frontend": "nx build frontend --skip-nx-cache",
     "build:ui": "nx build ui --skip-nx-cache",
     "lint": "nx run-many --target=lint --projects=ui,frontend --skip-nx-cache",
-    "test": "nx test run-many --target=test --projects=ui,frontend --skip-nx-cache",
-    "test:watch": "nx test run-many --target=test --projects=ui,frontend --skip-nx-cache --watch",
-    "test:coverage": "nx test run-many --target=test --projects=ui,frontend --skip-nx-cache --coverage",
+    "test": "nx run-many --target=test --projects=ui,frontend --skip-nx-cache",
+    "test:watch": "nx run-many --target=test --projects=ui,frontend --skip-nx-cache --watch",
+    "test:coverage": "nx run-many --target=test --projects=ui,frontend --skip-nx-cache --coverage",
     "affected:test": "nx affected:test",
     "affected:build": "nx affected:build",
-    "graph": "nx graph",
-    "docs:dev": "nx dev docs",
-    "docs:build": "nx build docs",
-    "docs:start": "nx start docs"
+    "graph": "nx graph"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
