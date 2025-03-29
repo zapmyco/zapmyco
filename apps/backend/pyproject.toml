@@ -28,6 +28,7 @@ python-jose = {extras = ["cryptography"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
 aiohttp = "*"
 websockets = ">=11.0.3"
+httpx = "^0.28.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "*"
