@@ -2,6 +2,7 @@ from fastapi import FastAPI, WebSocket
 from api import router, devices_router
 from db import Base, engine
 from starlette.websockets import WebSocketDisconnect
+from services.mi_api import set_device_state
 
 app = FastAPI()
 
@@ -19,6 +20,19 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             data = await websocket.receive_text()
+            
+            # 根据客户端消息设置value值
+            value = data.strip() == "1"
+            
+            # 调用小米API服务
+            response = await set_device_state(
+                device_id="1132894958",
+                siid=2,
+                piid=1,
+                value=value
+            )
+            print(f"API响应: {response}")
+            
             print(f"收到消息: {data}")  # 添加日志输出
             await websocket.send_text(f"服务器收到消息: {data}")
     except WebSocketDisconnect:
