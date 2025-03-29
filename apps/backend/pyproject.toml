@@ -20,13 +20,14 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.9"
 fastapi = ">=0.95.0"
-uvicorn = ">=0.22.0"
+uvicorn = {extras = ["standard"], version = ">=0.22.0"}
 sqlalchemy = ">=2.0.0"
 pydantic = ">=2.0.0"
 python-multipart = "*"
 python-jose = {extras = ["cryptography"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
 aiohttp = "*"
+websockets = ">=11.0.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "*"
