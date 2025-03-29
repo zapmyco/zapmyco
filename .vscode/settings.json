@@ -23,5 +23,12 @@
     "connectionId": "zapmyco",
     "projectKey": "zapmyco"
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "python.defaultInterpreterPath": "${env:POETRY_VIRTUALENV_PATH}/bin/python",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/apps/backend"
+  ],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.indexing": true
 }
