@@ -1,9 +1,9 @@
 #!/bin/bash
-# 简化版启动脚本
+# Simplified startup script
 
-# 切换到脚本所在目录
+# Change to the script directory
 cd "$(dirname "$0")"
 
-# 启动uvicorn服务器（开发模式，支持热更新）
-echo "启动后端服务器（开发模式）..."
-exec poetry run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+# Start uvicorn server (development mode with hot reload)
+echo "Starting backend server (development mode)..."
+exec poetry run python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload

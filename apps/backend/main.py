@@ -6,10 +6,10 @@ from services.mi_api import set_device_state
 
 app = FastAPI()
 
-# 创建数据库表
+# Create database tables
 Base.metadata.create_all(bind=engine)
 
-# 注册路由
+# Register routes
 app.include_router(router)
 app.include_router(devices_router)
 
@@ -21,27 +21,29 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             data = await websocket.receive_text()
             
-            # 根据客户端消息设置value值
+            # Set value based on client message
             value = data.strip() == "1"
             
-            # 调用小米API服务
+            # Call Xiaomi API service
             response = await set_device_state(
                 device_id="1132894958",
                 siid=2,
                 piid=1,
                 value=value
             )
-            print(f"API响应: {response}")
+            print(f"API response: {response}")
             
-            print(f"收到消息: {data}")  # 添加日志输出
-            await websocket.send_text(f"服务器收到消息: {data}")
+            print(f"Message received: {data}")  # Add log output
+            await websocket.send_text(f"Server received message: {data}")
     except WebSocketDisconnect:
-        print("客户端断开连接")  # 添加日志输出
+        print("Client disconnected")  # Add log output
     except Exception as e:
-        print(f"发生错误: {str(e)}")  # 添加日志输出
+        print(f"Error occurred: {str(e)}")  # Add log output
         await websocket.close()
 
 if __name__ == "__main__":
     import uvicorn
 
+    # This mode enables direct debugging when running the file
+    print("Starting server in debug mode...")
     uvicorn.run(app, host="0.0.0.0", port=8000)
