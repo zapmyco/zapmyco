@@ -28,6 +28,8 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}/apps/backend"
   ],
+  "python.languageServer": "Default",
+  "python.analysis.diagnosticMode": "workspace",
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.indexing": true
