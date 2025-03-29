@@ -3,6 +3,7 @@ from api import router, devices_router
 from db import Base, engine
 from starlette.websockets import WebSocketDisconnect
 from services.mi_api import set_device_state
+import debugpy; 
 
 app = FastAPI()
 
@@ -16,13 +17,18 @@ app.include_router(devices_router)
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    print("WebSocket连接请求到达")
     await websocket.accept()
+    print("WebSocket连接已接受")
     try:
         while True:
+            print("等待接收WebSocket消息...")
             data = await websocket.receive_text()
+            print(f"收到原始消息: '{data}'")
             
             # Set value based on client message
             value = data.strip() == "1"
+            print(f"处理后的值: {value}")
             
             # Call Xiaomi API service
             response = await set_device_state(
@@ -43,7 +49,6 @@ async def websocket_endpoint(websocket: WebSocket):
 
 if __name__ == "__main__":
     import uvicorn
-
-    # This mode enables direct debugging when running the file
-    print("Starting server in debug mode...")
+    
+    print("Starting FastAPI server in debugging mode...")
     uvicorn.run(app, host="0.0.0.0", port=8000)

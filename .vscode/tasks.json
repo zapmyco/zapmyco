@@ -26,7 +26,7 @@
         {
             "label": "Develop Backend",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/apps/backend && ./start_server.sh",
+            "command": "cd ${workspaceFolder}/apps/backend && DEBUG=1 ./start_server.sh",
             "options": {
                 "shell": {
                     "executable": "/bin/bash",

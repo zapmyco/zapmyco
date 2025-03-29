@@ -36,8 +36,18 @@ const WebSocketExample: React.FC = () => {
 
     const sendMessage = () => {
         if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+            console.log('发送消息:', message);
             wsRef.current.send(message);
             setMessage(''); // 清空输入框
+        } else {
+            console.error('WebSocket 未连接');
+        }
+    };
+
+    const sendTestMessage = () => {
+        if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+            console.log('发送测试消息: "1"');
+            wsRef.current.send("1");
         } else {
             console.error('WebSocket 未连接');
         }
@@ -64,6 +74,17 @@ const WebSocketExample: React.FC = () => {
                     }`}
                 >
                     发送消息
+                </button>
+                <button 
+                    onClick={sendTestMessage}
+                    disabled={!isConnected}
+                    className={`px-4 py-1 rounded ${
+                        isConnected 
+                            ? 'bg-green-500 text-white hover:bg-green-600' 
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
+                >
+                    发送测试消息"1"
                 </button>
             </div>
             <div className="mt-2">
