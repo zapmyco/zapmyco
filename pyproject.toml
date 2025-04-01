@@ -15,6 +15,15 @@ packages = [
 python = ">=3.9"
 httpx = ">=0.28.1,<0.29.0"
 openai = ">=1.70.0,<2.0.0"
+autopep8 = "^2.0.4"
+websockets = "^12.0"
+python-dotenv = "^1.0.1"
+
+[tool.autopep8]
+max_line_length = 88
+aggressive = 1
+indent_size = 4
+indent_with_tabs = true
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
