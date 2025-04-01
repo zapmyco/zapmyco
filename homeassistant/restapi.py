@@ -18,13 +18,13 @@ headers = {
 
 
 async def get_states():
-    async with httpx.AsyncClient(proxies=None) as client:
+    async with httpx.AsyncClient() as client:
         response = await client.get(f"{hass_url}/api/states", headers=headers)
         return response.json()
 
 
 async def turn_on_light(entity_id: str):
-    async with httpx.AsyncClient(proxies=None) as client:
+    async with httpx.AsyncClient() as client:
         payload = {"entity_id": entity_id}
         response = await client.post(
             f"{hass_url}/api/services/light/turn_on", headers=headers, json=payload
