@@ -4,6 +4,7 @@
     "dotenv",
     "hass",
     "httpx",
+    "pylint",
     "zapmyco"
   ]
 }
