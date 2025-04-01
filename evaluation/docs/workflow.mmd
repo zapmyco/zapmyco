@@ -1,0 +1,40 @@
+flowchart TD
+  Start([开始评测]) --> LoadConfig[加载配置文件]
+  LoadConfig --> |agent_config.yaml| AgentConfig[加载 Agent 配置]
+  LoadConfig --> |evaluation_config.yaml| EvalConfig[加载评测配置]
+  LoadConfig --> |metrics_config.yaml| MetricsConfig[加载指标配置]
+  
+  AgentConfig --> InitConnector[初始化 Agent 连接器]
+  EvalConfig --> LoadDataset[加载测试数据集]
+  MetricsConfig --> InitMetrics[初始化指标计算器]
+  
+  LoadDataset --> |datasets 目录| TestCases[测试用例]
+  
+  InitConnector --> Evaluator[创建评测器]
+  TestCases --> Evaluator
+  InitMetrics --> Evaluator
+  
+  Evaluator --> ParallelCheck{并行执行?}
+  ParallelCheck --> |是| ParallelExec[并行执行测试]
+  ParallelCheck --> |否| SequentialExec[顺序执行测试]
+  
+  ParallelExec --> TestResults[收集测试结果]
+  SequentialExec --> TestResults
+  
+  TestResults --> ProcessResults[处理原始结果]
+  ProcessResults --> CalculateMetrics[计算评测指标]
+  
+  CalculateMetrics --> GenerateReport[生成评测报告]
+  GenerateReport --> |HTML/PDF/JSON| SaveReport[保存报告]
+  
+  SaveReport --> End([评测完成])
+  
+  subgraph 单个测试执行流程
+    TestExec[执行测试] --> SendRequest[发送请求到 Agent]
+    SendRequest --> ReceiveResponse[接收 Agent 响应]
+    ReceiveResponse --> CompareResults[比较预期与实际结果]
+    CompareResults --> RecordResult[记录测试结果]
+  end
+  
+  SequentialExec -.-> TestExec
+  ParallelExec -.-> TestExec

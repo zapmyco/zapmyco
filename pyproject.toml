@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "zapmyco"
+version = "0.1.0"
+description = "Zapmyco is a home agent."
+authors = [
+    "shenjingnan <sjn.code@gmail.com>"
+]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [
+    { include = "zapmyco" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.13.0,<3.14"
+httpx = {extras = ["socks"], version = ">=0.28.1,<0.29.0"}
+openai = ">=1.70.0,<2.0.0"
+black = "^24.2.0"
+websockets = "^12.0"
+python-dotenv = "^1.0.1"
+pylint = "^3.3.6"
+transformers = "^4.51.0"
+torch = "^2.6.0"
+accelerate = "^1.6.0"
+pyttsx3 = "^2.98"
+pyaudio = "^0.2.14"
+soundfile = "^0.13.1"
+pydub = "^0.25.1"
+cryptography = "^44.0.1"
+pyyaml = "^6.0.2"
+jieba = "^0.42.1"
+levenshtein = "^0.27.1"
+aiohttp = "^3.11.16"
+async-timeout = "^5.0.1"
+datetime = "^5.5"
+pandas = "^2.2.3"
+numpy = "^2.2.4"
+dashscope = "^1.23.1"
+jsonschema = "^4.23.0"
+chromadb = {extras = ["all"], version = "^1.0.4"}
+mcp = "^1.6.0"
+librosa = "^0.11.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+patch = "^1.16"
+debugpy = "^1.8.13"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

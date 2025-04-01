@@ -1,0 +1,6 @@
+[submodule "docs/dev-hass"]
+	path = docs/dev-hass
+	url = git@github.com:home-assistant/developers.home-assistant.git
+[submodule "docs/fastmcp-python-sdk"]
+	path = docs/fastmcp-python-sdk
+	url = git@github.com:modelcontextprotocol/python-sdk.git

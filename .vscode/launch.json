@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Remote Attach",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            }
+        },
+        {
+            "name": "Debug:Agent",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "zapmyco.app",
+            "justMyCode": true
+        },
+        {
+            "name": "Debug:Evaluate",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "evaluation.main",
+            "justMyCode": true,
+        },
+        {
+            "name": "Debug:MCP",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "zapmyco.mcp_client",
+            "justMyCode": true
+        }
+    ]
+}

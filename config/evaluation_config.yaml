@@ -1,0 +1,25 @@
+# Dataset Settings
+datasets_dir: "evaluation/datasets"
+# dataset: "core"  # Uncomment to specify a specific dataset
+# test_file: "complex_instructions.jsonl"  # Uncomment to specify a specific test file
+
+# Output Settings
+report_dir: "results/reports"
+output_dir: "results/raw_results"
+
+# Execution Settings
+timeout: 60 # seconds
+parallel: True
+max_workers: 8
+
+# Benchmark Settings
+benchmark_iterations: 3
+warmup_iterations: 1
+benchmark_output_dir: "results/benchmarks"
+benchmark_dataset: "core"
+benchmark_file: "benchmark_tests.jsonl"
+save_responses: false # Whether to save full responses in benchmark results
+
+# Test Configuration
+dataset: "core" # 可选: core, scenario, stress
+test_file: "core_tests/intent_understanding.jsonl" # 指定具体的测试文件

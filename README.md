@@ -1,2 +1,5 @@
-# zapmyco
-Zapmyco is a home ai agent, it help you to control home devices.
+# Zapmyco
+
+⚡️🍄 Zapmyco is a home AI agent that helps you control your household devices.
+
+😎 We're exploring fun ways to use AI in your everyday home life.
