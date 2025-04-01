@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Home Assistant的URL和访问令牌
-hass_url = "http://localhost:8123"
+hass_url = f"http://{os.getenv('HASS_URL')}"
 access_token = os.getenv("HASS_ACCESS_TOKEN")
 if not access_token:
     raise ValueError("请在 .env 文件中设置 HASS_ACCESS_TOKEN")

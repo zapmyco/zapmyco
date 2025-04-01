@@ -9,7 +9,7 @@ load_dotenv()
 
 
 async def connect_to_hass():
-    uri = "ws://localhost:8123/api/websocket"
+    uri = f"ws://{os.getenv('HASS_URL')}/api/websocket"
     access_token = os.getenv("HASS_ACCESS_TOKEN")
     if not access_token:
         raise ValueError("请在 .env 文件中设置 HASS_ACCESS_TOKEN")
