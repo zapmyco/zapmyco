@@ -1,0 +1,24 @@
+# Zapmyco Home Agent Configuration
+name: "zapmyco"
+version: "1.0.0"
+
+# 运行时配置
+runtime:
+  max_memory: "1GB"
+  max_cpu_usage: 80
+
+# API Connection Settings
+api_url: "http://localhost:8000"
+endpoint: "/api/evaluate"
+health_endpoint: "/health"
+api_key: "" # Set your API key if required
+
+# Request Settings
+timeout: 60 # seconds
+max_retries: 3
+retry_delay: 1 # seconds
+
+# Context Settings
+context:
+  evaluation_mode: true
+  environment: "test"

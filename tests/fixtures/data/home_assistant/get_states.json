@@ -1,0 +1,612 @@
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": [
+    {
+      "entity_id": "person.nemo2",
+      "state": "unknown",
+      "attributes": {
+        "editable": true,
+        "id": "nemo2",
+        "device_trackers": [],
+        "user_id": "47e1c8c416434d389d13ed91e914983a",
+        "friendly_name": "nemo2"
+      },
+      "last_changed": "2025-04-07T13:30:20.744072+00:00",
+      "last_reported": "2025-04-07T13:30:27.551183+00:00",
+      "last_updated": "2025-04-07T13:30:27.551183+00:00",
+      "context": {
+        "id": "01JR873YTZGR8VYSGZF5TGRJPY",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "conversation.home_assistant",
+      "state": "unknown",
+      "attributes": {
+        "friendly_name": "Home Assistant",
+        "supported_features": 1
+      },
+      "last_changed": "2025-04-07T13:30:22.265643+00:00",
+      "last_reported": "2025-04-07T13:30:22.265643+00:00",
+      "last_updated": "2025-04-07T13:30:22.265643+00:00",
+      "context": {
+        "id": "01JR873SNSHSPD6S1YAEWT5YTP",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "zone.home",
+      "state": "0",
+      "attributes": {
+        "latitude": 52.3731339,
+        "longitude": 4.8903147,
+        "radius": 100,
+        "passive": false,
+        "persons": [],
+        "editable": true,
+        "icon": "mdi:home",
+        "friendly_name": "我的家"
+      },
+      "last_changed": "2025-04-07T13:30:22.588223+00:00",
+      "last_reported": "2025-04-07T13:30:22.588223+00:00",
+      "last_updated": "2025-04-07T13:30:22.588223+00:00",
+      "context": {
+        "id": "01JR873SZW61XYP2RN7TTSP5ZN",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sun.sun",
+      "state": "above_horizon",
+      "attributes": {
+        "next_dawn": "2025-04-09T04:20:21.842855+00:00",
+        "next_dusk": "2025-04-08T19:02:56.712972+00:00",
+        "next_midnight": "2025-04-08T23:41:57+00:00",
+        "next_noon": "2025-04-08T11:42:20+00:00",
+        "next_rising": "2025-04-09T04:56:27.126664+00:00",
+        "next_setting": "2025-04-08T18:26:47.243689+00:00",
+        "elevation": 29.28,
+        "azimuth": 119.1,
+        "rising": true,
+        "friendly_name": "Sun"
+      },
+      "last_changed": "2025-04-08T04:58:43.884998+00:00",
+      "last_reported": "2025-04-08T08:21:19.069616+00:00",
+      "last_updated": "2025-04-08T08:21:19.069616+00:00",
+      "context": {
+        "id": "01JRA7TM2XAFW2AN0KNW3ASPGJ",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "scene.new_scene",
+      "state": "2025-03-09T02:03:13.424305+00:00",
+      "attributes": {
+        "entity_id": [
+          "light.yeelink_cn_1132894958_mbulb3_s_2",
+          "light.xiaomi_cn_1143886953_hub1_s_3",
+          "notify.xiaomi_cn_1143886953_hub1_emit_virtual_event_a_4_1"
+        ],
+        "id": "1739701278024",
+        "friendly_name": "Test Scene"
+      },
+      "last_changed": "2025-04-07T13:30:22.724732+00:00",
+      "last_reported": "2025-04-07T13:30:22.724732+00:00",
+      "last_updated": "2025-04-07T13:30:22.724732+00:00",
+      "context": {
+        "id": "01JR873T447WRGG75SKMVASVY9",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.sun_next_dawn",
+      "state": "2025-04-09T04:20:21+00:00",
+      "attributes": {
+        "device_class": "timestamp",
+        "friendly_name": "Sun Next dawn"
+      },
+      "last_changed": "2025-04-08T04:22:45.846264+00:00",
+      "last_reported": "2025-04-08T06:09:18.820486+00:00",
+      "last_updated": "2025-04-08T04:22:45.846264+00:00",
+      "context": {
+        "id": "01JR9T5TAP683KD5QQ343H74B0",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.sun_next_dusk",
+      "state": "2025-04-08T19:02:56+00:00",
+      "attributes": {
+        "device_class": "timestamp",
+        "friendly_name": "Sun Next dusk"
+      },
+      "last_changed": "2025-04-08T00:15:57.729682+00:00",
+      "last_reported": "2025-04-08T06:09:18.820683+00:00",
+      "last_updated": "2025-04-08T00:15:57.729682+00:00",
+      "context": {
+        "id": "01JR9C1X91J9HBFXMA2QT47H04",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.sun_next_midnight",
+      "state": "2025-04-08T23:41:57+00:00",
+      "attributes": {
+        "device_class": "timestamp",
+        "friendly_name": "Sun Next midnight"
+      },
+      "last_changed": "2025-04-08T00:15:57.730048+00:00",
+      "last_reported": "2025-04-08T06:09:18.820843+00:00",
+      "last_updated": "2025-04-08T00:15:57.730048+00:00",
+      "context": {
+        "id": "01JR9C1X92KNJ4EP8RC9HMR7K5",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.sun_next_noon",
+      "state": "2025-04-08T11:42:20+00:00",
+      "attributes": {
+        "device_class": "timestamp",
+        "friendly_name": "Sun Next noon"
+      },
+      "last_changed": "2025-04-07T13:30:22.757254+00:00",
+      "last_reported": "2025-04-08T06:09:18.820909+00:00",
+      "last_updated": "2025-04-07T13:30:22.757254+00:00",
+      "context": {
+        "id": "01JR873T55K5CQPDYA1Q15636H",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.sun_next_rising",
+      "state": "2025-04-09T04:56:27+00:00",
+      "attributes": {
+        "device_class": "timestamp",
+        "friendly_name": "Sun Next rising"
+      },
+      "last_changed": "2025-04-08T04:58:43.886576+00:00",
+      "last_reported": "2025-04-08T06:09:18.821069+00:00",
+      "last_updated": "2025-04-08T04:58:43.886576+00:00",
+      "context": {
+        "id": "01JR9W7NSE208795HQBBP2JVJJ",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.sun_next_setting",
+      "state": "2025-04-08T18:26:47+00:00",
+      "attributes": {
+        "device_class": "timestamp",
+        "friendly_name": "Sun Next setting"
+      },
+      "last_changed": "2025-04-08T00:15:57.730335+00:00",
+      "last_reported": "2025-04-08T06:09:18.821113+00:00",
+      "last_updated": "2025-04-08T00:15:57.730335+00:00",
+      "context": {
+        "id": "01JR9C1X92Q35T8096QHHRJ2M1",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "todo.shopping_list",
+      "state": "0",
+      "attributes": {
+        "friendly_name": "Shopping List",
+        "supported_features": 15
+      },
+      "last_changed": "2025-04-07T13:30:22.830819+00:00",
+      "last_reported": "2025-04-07T13:30:22.830819+00:00",
+      "last_updated": "2025-04-07T13:30:22.830819+00:00",
+      "context": {
+        "id": "01JR873T7EWZGM490PNW61WDT5",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.xiaomi_cn_1143886953_hub1_access_mode_p_2_1",
+      "state": "5G 无线",
+      "attributes": {
+        "options": [
+          "有线",
+          "5G 无线",
+          "2.4G 无线"
+        ],
+        "device_class": "enum",
+        "icon": "mdi:format-text",
+        "friendly_name": "Xiaomi 中枢网关  网关 接入方式"
+      },
+      "last_changed": "2025-04-08T01:57:20.635593+00:00",
+      "last_reported": "2025-04-08T01:57:20.635593+00:00",
+      "last_updated": "2025-04-08T01:57:20.635593+00:00",
+      "context": {
+        "id": "01JR9HVHKVSRQ8KKM8YQ522W15",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.xiaomi_cn_1143886953_hub1_ip_address_p_2_2",
+      "state": "192.168.31.240",
+      "attributes": {
+        "icon": "mdi:ip",
+        "friendly_name": "Xiaomi 中枢网关  网关 IP地址"
+      },
+      "last_changed": "2025-04-08T01:57:20.635742+00:00",
+      "last_reported": "2025-04-08T01:57:20.635742+00:00",
+      "last_updated": "2025-04-08T01:57:20.635742+00:00",
+      "context": {
+        "id": "01JR9HVHKVGSMGY04RWJ7GD6MC",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.xiaomi_cn_1143886953_hub1_wifi_ssid_p_2_3",
+      "state": "XMO",
+      "attributes": {
+        "friendly_name": "Xiaomi 中枢网关  网关 WiFi网络名称"
+      },
+      "last_changed": "2025-04-08T01:57:20.635833+00:00",
+      "last_reported": "2025-04-08T01:57:20.635833+00:00",
+      "last_updated": "2025-04-08T01:57:20.635833+00:00",
+      "context": {
+        "id": "01JR9HVHKV05A49GJDXYPDCHM7",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.xiaomi_cn_1143886953_hub1_dhcp_server_mac_adress_p_2_5",
+      "state": "54:48:e6:a9:8a:84",
+      "attributes": {
+        "friendly_name": "Xiaomi 中枢网关  网关 DHCP服务器mac地址"
+      },
+      "last_changed": "2025-04-08T01:57:20.635880+00:00",
+      "last_reported": "2025-04-08T01:57:20.635880+00:00",
+      "last_updated": "2025-04-08T01:57:20.635880+00:00",
+      "context": {
+        "id": "01JR9HVHKV90BBDMQ57Z4B0R9T",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.linp_cn_blt_3_1kd89jrngco00_es2_has_someone_duration_p_2_1080",
+      "state": "unknown",
+      "attributes": {
+        "unit_of_measurement": "min",
+        "device_class": "duration",
+        "friendly_name": "领普人体存在传感器ES3  存在传感器 有人持续时长"
+      },
+      "last_changed": "2025-04-08T01:57:20.636010+00:00",
+      "last_reported": "2025-04-08T01:57:20.636010+00:00",
+      "last_updated": "2025-04-08T01:57:20.636010+00:00",
+      "context": {
+        "id": "01JR9HVHKW0S2VRJR818XV9RC2",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.linp_cn_blt_3_1kd89jrngco00_es2_illumination_p_2_1005",
+      "state": "6",
+      "attributes": {
+        "state_class": "measurement",
+        "unit_of_measurement": "lx",
+        "device_class": "illuminance",
+        "friendly_name": "领普人体存在传感器ES3  存在传感器 光照度"
+      },
+      "last_changed": "2025-04-08T07:57:23.015549+00:00",
+      "last_reported": "2025-04-08T07:57:23.015549+00:00",
+      "last_updated": "2025-04-08T07:57:23.015549+00:00",
+      "context": {
+        "id": "01JRA6ESP73BJNV22E2HG3RJ8F",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.linp_cn_blt_3_1kd89jrngco00_es2_no_one_duration_p_2_1079",
+      "state": "10",
+      "attributes": {
+        "unit_of_measurement": "min",
+        "device_class": "duration",
+        "friendly_name": "领普人体存在传感器ES3  存在传感器 无人持续时长"
+      },
+      "last_changed": "2025-04-08T01:57:20.636153+00:00",
+      "last_reported": "2025-04-08T01:57:20.636153+00:00",
+      "last_updated": "2025-04-08T01:57:20.636153+00:00",
+      "context": {
+        "id": "01JR9HVHKW084QV9QGCVJBSQS9",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.linp_cn_blt_3_1kd89jrngco00_es2_battery_level_p_4_1003",
+      "state": "100",
+      "attributes": {
+        "state_class": "measurement",
+        "unit_of_measurement": "%",
+        "device_class": "battery",
+        "friendly_name": "领普人体存在传感器ES3  电池 电池电量"
+      },
+      "last_changed": "2025-04-08T01:57:20.636222+00:00",
+      "last_reported": "2025-04-08T01:57:20.636222+00:00",
+      "last_updated": "2025-04-08T01:57:20.636222+00:00",
+      "context": {
+        "id": "01JR9HVHKW4QJPXR9HEZP6TBEE",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.linp_cn_blt_3_1kd89jrngco00_es2_customized_property_1_p_5_1018",
+      "state": "0",
+      "attributes": {
+        "friendly_name": "领普人体存在传感器ES3  BLE专用自定义服务(ble专用，事件参数总长度不能超过9字节) 近距区间无人0有人1-255"
+      },
+      "last_changed": "2025-04-08T01:57:20.636380+00:00",
+      "last_reported": "2025-04-08T01:57:20.636380+00:00",
+      "last_updated": "2025-04-08T01:57:20.636380+00:00",
+      "context": {
+        "id": "01JR9HVHKWY1NFK2JYYW5S7FSX",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.miaomiaoc_cn_blt_3_1kk52cq2g4s06_t9_battery_level_p_2_1003",
+      "state": "100",
+      "attributes": {
+        "state_class": "measurement",
+        "unit_of_measurement": "%",
+        "device_class": "battery",
+        "friendly_name": "米家智能温湿度计3  电池 电池电量"
+      },
+      "last_changed": "2025-04-08T01:57:20.636811+00:00",
+      "last_reported": "2025-04-08T03:59:42.136376+00:00",
+      "last_updated": "2025-04-08T01:57:20.636811+00:00",
+      "context": {
+        "id": "01JR9HVHKWF0DX9SZX0SFYMX4C",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.miaomiaoc_cn_blt_3_1kk52cq2g4s06_t9_temperature_p_3_1001",
+      "state": "24.1",
+      "attributes": {
+        "state_class": "measurement",
+        "unit_of_measurement": "°C",
+        "device_class": "temperature",
+        "friendly_name": "米家智能温湿度计3  温湿度传感器 温度"
+      },
+      "last_changed": "2025-04-08T07:30:42.817494+00:00",
+      "last_reported": "2025-04-08T07:30:42.817494+00:00",
+      "last_updated": "2025-04-08T07:30:42.817494+00:00",
+      "context": {
+        "id": "01JRA4XZ016AVN5N2HHEBNG4E7",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "sensor.miaomiaoc_cn_blt_3_1kk52cq2g4s06_t9_relative_humidity_p_3_1002",
+      "state": "42",
+      "attributes": {
+        "state_class": "measurement",
+        "unit_of_measurement": "%",
+        "device_class": "humidity",
+        "friendly_name": "米家智能温湿度计3  温湿度传感器 湿度"
+      },
+      "last_changed": "2025-04-08T06:19:40.900605+00:00",
+      "last_reported": "2025-04-08T06:39:42.977007+00:00",
+      "last_updated": "2025-04-08T06:19:40.900605+00:00",
+      "context": {
+        "id": "01JRA0VWZ4BW7NC80VHHY24053",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "text.xiaomi_cn_1143886953_hub1_emit_virtual_event_a_4_1",
+      "state": "",
+      "attributes": {
+        "mode": "text",
+        "min": 0,
+        "max": 255,
+        "pattern": null,
+        "action params": "[事件名称(str)]",
+        "friendly_name": "Xiaomi 中枢网关  虚拟服务 产生虚拟事件"
+      },
+      "last_changed": "2025-04-08T01:57:19.634158+00:00",
+      "last_reported": "2025-04-08T01:57:19.634158+00:00",
+      "last_updated": "2025-04-08T01:57:19.634158+00:00",
+      "context": {
+        "id": "01JR9HVGMJ70YKGRAFPV3NFKB2",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "binary_sensor.linp_cn_blt_3_1kd89jrngco00_es2_occupancy_status_p_2_1078",
+      "state": "off",
+      "attributes": {
+        "device_class": "occupancy",
+        "friendly_name": "领普人体存在传感器ES3  存在传感器 有人无人(极客版用无人状态取反判断有人，不用勾选全部有人)"
+      },
+      "last_changed": "2025-04-08T01:57:20.636566+00:00",
+      "last_reported": "2025-04-08T01:57:20.636566+00:00",
+      "last_updated": "2025-04-08T01:57:20.636566+00:00",
+      "context": {
+        "id": "01JR9HVHKW5714F9KA7074ZXFD",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "event.xiaomi_cn_1143886953_hub1_network_changed_e_2_2",
+      "state": "unknown",
+      "attributes": {
+        "event_types": [
+          "网络发生变化"
+        ],
+        "event_type": "网络发生变化",
+        "接入方式": 1,
+        "IP地址": "192.168.31.240",
+        "WiFi网络名称": "XMO",
+        "当前时间": 1741182037,
+        "friendly_name": "Xiaomi 中枢网关  网关 网络发生变化"
+      },
+      "last_changed": "2025-04-08T01:57:19.634759+00:00",
+      "last_reported": "2025-04-08T01:57:19.634759+00:00",
+      "last_updated": "2025-04-08T01:57:19.634759+00:00",
+      "context": {
+        "id": "01JR9HVGMJHRA3DTRN7QFPV382",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "event.xiaomi_cn_1143886953_hub1_virtual_event_e_4_1",
+      "state": "unknown",
+      "attributes": {
+        "event_types": [
+          "虚拟事件发生"
+        ],
+        "event_type": "虚拟事件发生",
+        "事件名称": "1111",
+        "friendly_name": "Xiaomi 中枢网关  虚拟服务 虚拟事件发生"
+      },
+      "last_changed": "2025-04-08T01:57:19.634837+00:00",
+      "last_reported": "2025-04-08T01:57:19.634837+00:00",
+      "last_updated": "2025-04-08T01:57:19.634837+00:00",
+      "context": {
+        "id": "01JR9HVGMJQ72KZWH8HYNEZSVR",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "event.linp_cn_blt_3_1kd89jrngco00_es2_device_be_reset_e_2_1028",
+      "state": "unknown",
+      "attributes": {
+        "event_types": [
+          "设备被重置"
+        ],
+        "event_type": null,
+        "friendly_name": "领普人体存在传感器ES3  存在传感器 设备被重置"
+      },
+      "last_changed": "2025-04-08T01:57:19.635411+00:00",
+      "last_reported": "2025-04-08T01:57:19.635411+00:00",
+      "last_updated": "2025-04-08T01:57:19.635411+00:00",
+      "context": {
+        "id": "01JR9HVGMKACC00PBBZAC7MPK4",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "event.miaomiaoc_cn_blt_3_1kk52cq2g4s06_t9_low_battery_e_2_1001",
+      "state": "unknown",
+      "attributes": {
+        "event_types": [
+          "电量低"
+        ],
+        "event_type": null,
+        "friendly_name": "米家智能温湿度计3  电池 电量低"
+      },
+      "last_changed": "2025-04-08T01:57:19.635678+00:00",
+      "last_reported": "2025-04-08T01:57:19.635678+00:00",
+      "last_updated": "2025-04-08T01:57:19.635678+00:00",
+      "context": {
+        "id": "01JR9HVGMKYZM7JBYMHSPBBZ7S",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "light.yeelink_cn_1132894958_mbulb3_s_2",
+      "state": "off",
+      "attributes": {
+        "min_color_temp_kelvin": 2700,
+        "max_color_temp_kelvin": 6500,
+        "min_mireds": 153,
+        "max_mireds": 370,
+        "supported_color_modes": [
+          "color_temp"
+        ],
+        "color_mode": null,
+        "brightness": null,
+        "color_temp_kelvin": null,
+        "color_temp": null,
+        "hs_color": null,
+        "rgb_color": null,
+        "xy_color": null,
+        "friendly_name": "小灯  灯",
+        "supported_features": 0
+      },
+      "last_changed": "2025-04-08T01:57:20.635270+00:00",
+      "last_reported": "2025-04-08T01:57:20.635270+00:00",
+      "last_updated": "2025-04-08T01:57:20.635270+00:00",
+      "context": {
+        "id": "01JR9HVHKVQ2VW1Y5AX64NDPBH",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "light.xiaomi_cn_1143886953_hub1_s_3",
+      "state": "on",
+      "attributes": {
+        "supported_color_modes": [
+          "onoff"
+        ],
+        "color_mode": "onoff",
+        "friendly_name": "Xiaomi 中枢网关  指示灯",
+        "supported_features": 0
+      },
+      "last_changed": "2025-04-08T01:57:20.635945+00:00",
+      "last_reported": "2025-04-08T01:57:20.635945+00:00",
+      "last_updated": "2025-04-08T01:57:20.635945+00:00",
+      "context": {
+        "id": "01JR9HVHKVTVKT7SQ87Q5QGGV7",
+        "parent_id": null,
+        "user_id": null
+      }
+    },
+    {
+      "entity_id": "notify.xiaomi_cn_1143886953_hub1_emit_virtual_event_a_4_1",
+      "state": "unknown",
+      "attributes": {
+        "action params": "[事件名称(str)]",
+        "friendly_name": "Xiaomi 中枢网关  虚拟服务 产生虚拟事件",
+        "supported_features": 0
+      },
+      "last_changed": "2025-04-08T01:57:19.634605+00:00",
+      "last_reported": "2025-04-08T01:57:19.634605+00:00",
+      "last_updated": "2025-04-08T01:57:19.634605+00:00",
+      "context": {
+        "id": "01JR9HVGMJ6230CMQT7R75XJVX",
+        "parent_id": null,
+        "user_id": null
+      }
+    }
+  ]
+}

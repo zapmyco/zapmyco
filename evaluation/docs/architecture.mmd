@@ -1,0 +1,48 @@
+flowchart TB
+  subgraph "核心组件"
+    main[main.py] --> evaluator[framework/evaluator.py]
+    evaluator --> connector[framework/connectors/agent_connector.py]
+    evaluator --> metrics[framework/metrics/metric_calculator.py]
+    evaluator --> dataset_loader[framework/utils/dataset_loader.py]
+    evaluator --> result_processor[framework/utils/result_processor.py]
+  end
+  
+  subgraph "配置文件"
+    agent_config[agent_config.yaml] -.-> main
+    eval_config[evaluation_config.yaml] -.-> main
+    metrics_config[metrics_config.yaml] -.-> main
+  end
+  
+  subgraph "工具"
+    main --> benchmark[tools/benchmark_runner.py]
+    main --> validator[tools/dataset_validator.py]
+    main --> report_gen[reports/report_generator.py]
+  end
+  
+  subgraph "数据集"
+    dataset_loader --> core_tests[datasets/core_tests]
+    dataset_loader --> scenario_tests[datasets/scenario_tests]
+    dataset_loader --> stress_tests[datasets/stress_tests]
+  end
+  
+  subgraph "输出"
+    evaluator --> raw_results[results/raw_results]
+    benchmark --> benchmark_results[results/benchmarks]
+    report_gen --> reports[reports/generated]
+  end
+  
+  connector --> agent[Zapmyco Home Agent]
+  
+  classDef core fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef config fill:#bbf,stroke:#333,stroke-width:1px;
+  classDef tools fill:#bfb,stroke:#333,stroke-width:1px;
+  classDef data fill:#fbb,stroke:#333,stroke-width:1px;
+  classDef output fill:#bff,stroke:#333,stroke-width:1px;
+  classDef external fill:#ffb,stroke:#333,stroke-width:1px;
+  
+  class main,evaluator,connector,metrics,dataset_loader,result_processor core;
+  class agent_config,eval_config,metrics_config config;
+  class benchmark,validator,report_gen tools;
+  class core_tests,scenario_tests,stress_tests data;
+  class raw_results,benchmark_results,reports output;
+  class agent external;

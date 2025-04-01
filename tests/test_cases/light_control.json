@@ -1,0 +1,95 @@
+{
+    "test_cases": [
+        {
+            "test_id": "light_turn_on_001",
+            "description": "打开客厅灯测试",
+            "mock_context": {
+                "states": [
+                    {
+                        "entity_id": "light.living_room",
+                        "state": "off",
+                        "attributes": {
+                            "friendly_name": "客厅灯",
+                            "brightness": 0,
+                            "color_temp": 300
+                        }
+                    }
+                ],
+                "entity_registry": {
+                    "light.living_room": {
+                        "name": "客厅灯",
+                        "capabilities": {
+                            "supported_features": ["brightness", "color_temp"]
+                        },
+                        "area_id": "living_room"
+                    }
+                },
+                "area_registry": {
+                    "living_room": {
+                        "name": "客厅"
+                    }
+                }
+            },
+            "input": {
+                "query": "打开客厅的灯"
+            },
+            "expected_output": {
+                "success": true,
+                "response": {
+                    "function": {
+                        "name": "light.living_room",
+                        "arguments": {
+                            "action": "turn_on"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "test_id": "light_brightness_002",
+            "description": "调整客厅灯亮度测试",
+            "mock_context": {
+                "states": [
+                    {
+                        "entity_id": "light.living_room",
+                        "state": "on",
+                        "attributes": {
+                            "friendly_name": "客厅灯",
+                            "brightness": 128,
+                            "color_temp": 300
+                        }
+                    }
+                ],
+                "entity_registry": {
+                    "light.living_room": {
+                        "name": "客厅灯",
+                        "capabilities": {
+                            "supported_features": ["brightness", "color_temp"]
+                        },
+                        "area_id": "living_room"
+                    }
+                },
+                "area_registry": {
+                    "living_room": {
+                        "name": "客厅"
+                    }
+                }
+            },
+            "input": {
+                "query": "把客厅的灯调亮一点"
+            },
+            "expected_output": {
+                "success": true,
+                "response": {
+                    "function": {
+                        "name": "light.living_room",
+                        "arguments": {
+                            "action": "turn_on",
+                            "brightness": 192
+                        }
+                    }
+                }
+            }
+        }
+    ]
+} 

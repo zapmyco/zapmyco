@@ -1,0 +1,40 @@
+# Enabled Metrics
+enabled_metrics:
+  - overall_success_rate
+  - category_success_rates
+  - response_times
+  - accuracy_metrics
+  - feature_coverage
+
+# Thresholds for Pass/Fail
+thresholds:
+  overall_success_rate: 80.0 # Minimum overall success rate (%)
+  category_minimum: 70.0 # Minimum success rate for any category (%)
+  response_time_avg: 5.0 # Maximum average response time (seconds)
+  response_time_p95: 10.0 # Maximum 95th percentile response time (seconds)
+
+# Custom Metrics
+custom_metrics:
+  - name: complex_instruction_rate
+    type: filter_count
+    filter_field: category
+    filter_value: complex_instructions
+    description: "Success rate for complex instructions"
+
+  - name: average_response_time
+    type: average_field
+    field: duration
+    description: "Average response time across all tests"
+
+metrics:
+  - name: "response_time"
+    type: "timing"
+    threshold: 5.0 # 秒
+
+  - name: "accuracy"
+    type: "percentage"
+    threshold: 0.95 # 95%
+
+  - name: "memory_usage"
+    type: "resource"
+    threshold: "1GB"

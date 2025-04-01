@@ -1,0 +1,121 @@
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "config": {
+      "component_name": "config",
+      "icon": "hass:cog",
+      "title": "config",
+      "config": null,
+      "url_path": "config",
+      "require_admin": true,
+      "config_panel_domain": null
+    },
+    "lovelace": {
+      "component_name": "lovelace",
+      "icon": null,
+      "title": null,
+      "config": {
+        "mode": "storage"
+      },
+      "url_path": "lovelace",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "map": {
+      "component_name": "lovelace",
+      "icon": "mdi:map",
+      "title": "Map",
+      "config": {
+        "mode": "storage"
+      },
+      "url_path": "map",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "dashboard-12312312": {
+      "component_name": "lovelace",
+      "icon": "hass:view-dashboard",
+      "title": "12312312",
+      "config": {
+        "mode": "storage"
+      },
+      "url_path": "dashboard-12312312",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "profile": {
+      "component_name": "profile",
+      "icon": null,
+      "title": null,
+      "config": null,
+      "url_path": "profile",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "developer-tools": {
+      "component_name": "developer-tools",
+      "icon": "hass:hammer",
+      "title": "developer_tools",
+      "config": null,
+      "url_path": "developer-tools",
+      "require_admin": true,
+      "config_panel_domain": null
+    },
+    "logbook": {
+      "component_name": "logbook",
+      "icon": "hass:format-list-bulleted-type",
+      "title": "logbook",
+      "config": null,
+      "url_path": "logbook",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "media-browser": {
+      "component_name": "media-browser",
+      "icon": "hass:play-box-multiple",
+      "title": "media_browser",
+      "config": null,
+      "url_path": "media-browser",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "history": {
+      "component_name": "history",
+      "icon": "hass:chart-box",
+      "title": "history",
+      "config": null,
+      "url_path": "history",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "_my_redirect": {
+      "component_name": "my",
+      "icon": null,
+      "title": null,
+      "config": null,
+      "url_path": "_my_redirect",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "energy": {
+      "component_name": "energy",
+      "icon": "mdi:lightning-bolt",
+      "title": "energy",
+      "config": null,
+      "url_path": "energy",
+      "require_admin": false,
+      "config_panel_domain": null
+    },
+    "todo": {
+      "component_name": "todo",
+      "icon": "mdi:clipboard-list",
+      "title": "todo",
+      "config": null,
+      "url_path": "todo",
+      "require_admin": false,
+      "config_panel_domain": null
+    }
+  }
+}
