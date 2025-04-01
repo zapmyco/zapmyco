@@ -13,7 +13,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.9"
-httpx = ">=0.28.1,<0.29.0"
+httpx = {extras = ["socks"], version = ">=0.28.1,<0.29.0"}
 openai = ">=1.70.0,<2.0.0"
 autopep8 = "^2.0.4"
 websockets = "^12.0"
