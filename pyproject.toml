@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "zapmyco"
+version = "0.1.0"
+description = "Zapmyco is a home agent."
+authors = [
+    "shenjingnan <sjn.code@gmail.com>"
+]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [
+    { include = "zapmyco" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+httpx = ">=0.28.1,<0.29.0"
+openai = ">=1.70.0,<2.0.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
