@@ -388,11 +388,10 @@ class Evaluator:
 
     def _save_results(self, results: Dict) -> None:
         """Save evaluation results to file"""
-        timestamp = time.strftime("%Y%m%d_%H%M%S")
-        filename = f"{self.results_dir}/evaluation_{timestamp}.json"
+        filename = f"{self.results_dir}/evaluation.json"
 
         with open(filename, "w") as f:
-            json.dump(results, f, indent=2)
+            json.dump(results, f, indent=2, ensure_ascii=False)
 
         logger.info(f"Results saved to {filename}")
 

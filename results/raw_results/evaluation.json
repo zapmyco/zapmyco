@@ -1,0 +1,489 @@
+{
+  "timestamp": "2025-04-17 13:37:11",
+  "duration": 26.375240325927734,
+  "config": {
+    "agent": "zapmyco",
+    "version": "1.0.0",
+    "timeout": 60,
+    "parallel": false
+  },
+  "summary": {
+    "total_tests": 2,
+    "passed": 0,
+    "failed": 2,
+    "success_rate": 0.0
+  },
+  "metrics": {
+    "overall_success_rate": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "errors": 0,
+      "rate": 0.0
+    },
+    "category_success_rates": {
+      "intent_understanding": {
+        "total": 2,
+        "passed": 0,
+        "failed": 2,
+        "errors": 0,
+        "rate": 0.0
+      }
+    },
+    "response_times": {
+      "min": 6.587,
+      "max": 19.581,
+      "avg": 13.084,
+      "median": 19.581,
+      "p90": 19.581,
+      "p95": 19.581,
+      "total_count": 2
+    },
+    "feature_coverage": {
+      "total_features": 2,
+      "features": {
+        "basic_command": {
+          "total": 2,
+          "passed": 0,
+          "rate": 0.0
+        },
+        "lighting": {
+          "total": 2,
+          "passed": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "complex_instruction_rate": {
+      "count": 0,
+      "total": 2,
+      "percentage": 0.0
+    },
+    "average_response_time": {
+      "average": 13.084,
+      "min": 6.587,
+      "max": 19.581,
+      "count": 2
+    }
+  },
+  "results": [
+    {
+      "test_id": "intent_basic_001",
+      "category": "intent_understanding",
+      "description": "基础灯光控制-开灯",
+      "status": "failed",
+      "duration": 19.58133888244629,
+      "input": {
+        "text": "打开客厅灯"
+      },
+      "expected_output": {
+        "choices": [
+          {
+            "message": {
+              "tool_calls": [
+                {
+                  "function": {
+                    "name": "call_service",
+                    "arguments": {
+                      "domain": "light",
+                      "service": "turn_on",
+                      "service_data": {
+                        "entity_id": "light.living_room"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "actual_output": {
+        "id": "44d91c5f-4f57-4d93-9a6a-65aaae50e648",
+        "choices": [
+          {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "",
+              "role": "assistant",
+              "tool_calls": [
+                {
+                  "id": "call_0_e015229c-e76e-4887-b6c9-3504a11a1425",
+                  "function": {
+                    "arguments": "{\"domain\":\"light\",\"service\":\"turn_on\",\"service_data\":{\"entity_id\":\"light.living_room\"}}",
+                    "name": "call_service"
+                  },
+                  "type": "function",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "created": 1744868206,
+        "model": "deepseek-chat",
+        "object": "chat.completion",
+        "system_fingerprint": "fp_3d5141a69a_prod0225",
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 460,
+          "total_tokens": 496,
+          "prompt_tokens_details": {
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 76
+        }
+      },
+      "comparison": {
+        "choices": {
+          "status": "mismatch",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "light",
+                        "service": "turn_on",
+                        "service_data": {
+                          "entity_id": "light.living_room"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_e015229c-e76e-4887-b6c9-3504a11a1425",
+                    "function": {
+                      "arguments": "{\"domain\":\"light\",\"service\":\"turn_on\",\"service_data\":{\"entity_id\":\"light.living_room\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "tags": [
+        "lighting",
+        "basic_command"
+      ],
+      "difficulty": "easy",
+      "output_summary": {
+        "id": "44d91c5f-4f57-4d93-9a6a-65aaae50e648",
+        "choices": [
+          {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "",
+              "role": "assistant",
+              "tool_calls": [
+                {
+                  "id": "call_0_e015229c-e76e-4887-b6c9-3504a11a1425",
+                  "function": {
+                    "arguments": "{\"domain\":\"light\",\"service\":\"turn_on\",\"service_data\":{\"entity_id\":\"light.living_room\"}}",
+                    "name": "call_service"
+                  },
+                  "type": "function",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "created": 1744868206,
+        "model": "deepseek-chat",
+        "object": "chat.completion",
+        "system_fingerprint": "fp_3d5141a69a_prod0225",
+        "usage": {
+          "completion_tokens": 36,
+          "prompt_tokens": 460,
+          "total_tokens": 496,
+          "prompt_tokens_details": {
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 76
+        }
+      },
+      "comparison_summary": {
+        "choices": {
+          "status": "mismatch",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "light",
+                        "service": "turn_on",
+                        "service_data": {
+                          "entity_id": "light.living_room"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_e015229c-e76e-4887-b6c9-3504a11a1425",
+                    "function": {
+                      "arguments": "{\"domain\":\"light\",\"service\":\"turn_on\",\"service_data\":{\"entity_id\":\"light.living_room\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "intent_basic_002",
+      "category": "intent_understanding",
+      "description": "基础灯光控制-关灯",
+      "status": "failed",
+      "duration": 6.586905241012573,
+      "input": {
+        "text": "关闭厨房灯"
+      },
+      "expected_output": {
+        "choices": [
+          {
+            "message": {
+              "tool_calls": [
+                {
+                  "function": {
+                    "name": "call_service",
+                    "arguments": {
+                      "domain": "light",
+                      "service": "turn_on",
+                      "service_data": {
+                        "entity_id": "light.kitchen"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "actual_output": {
+        "id": "ab7f1bcc-b91d-4694-9e67-4a9b20938094",
+        "choices": [
+          {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "",
+              "role": "assistant",
+              "tool_calls": [
+                {
+                  "id": "call_0_0e82ed7f-cc21-4edc-94d1-a4e489cb3dbe",
+                  "function": {
+                    "arguments": "{\"domain\":\"light\",\"service\":\"turn_off\",\"service_data\":{\"entity_id\":\"light.kitchen\"}}",
+                    "name": "call_service"
+                  },
+                  "type": "function",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "created": 1744868225,
+        "model": "deepseek-chat",
+        "object": "chat.completion",
+        "system_fingerprint": "fp_3d5141a69a_prod0225",
+        "usage": {
+          "completion_tokens": 38,
+          "prompt_tokens": 391,
+          "total_tokens": 429,
+          "prompt_tokens_details": {
+            "cached_tokens": 320
+          },
+          "prompt_cache_hit_tokens": 320,
+          "prompt_cache_miss_tokens": 71
+        }
+      },
+      "comparison": {
+        "choices": {
+          "status": "mismatch",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "light",
+                        "service": "turn_on",
+                        "service_data": {
+                          "entity_id": "light.kitchen"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_0e82ed7f-cc21-4edc-94d1-a4e489cb3dbe",
+                    "function": {
+                      "arguments": "{\"domain\":\"light\",\"service\":\"turn_off\",\"service_data\":{\"entity_id\":\"light.kitchen\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "tags": [
+        "lighting",
+        "basic_command"
+      ],
+      "difficulty": "easy",
+      "output_summary": {
+        "id": "ab7f1bcc-b91d-4694-9e67-4a9b20938094",
+        "choices": [
+          {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+              "content": "",
+              "role": "assistant",
+              "tool_calls": [
+                {
+                  "id": "call_0_0e82ed7f-cc21-4edc-94d1-a4e489cb3dbe",
+                  "function": {
+                    "arguments": "{\"domain\":\"light\",\"service\":\"turn_off\",\"service_data\":{\"entity_id\":\"light.kitchen\"}}",
+                    "name": "call_service"
+                  },
+                  "type": "function",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        ],
+        "created": 1744868225,
+        "model": "deepseek-chat",
+        "object": "chat.completion",
+        "system_fingerprint": "fp_3d5141a69a_prod0225",
+        "usage": {
+          "completion_tokens": 38,
+          "prompt_tokens": 391,
+          "total_tokens": 429,
+          "prompt_tokens_details": {
+            "cached_tokens": 320
+          },
+          "prompt_cache_hit_tokens": 320,
+          "prompt_cache_miss_tokens": 71
+        }
+      },
+      "comparison_summary": {
+        "choices": {
+          "status": "mismatch",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "light",
+                        "service": "turn_on",
+                        "service_data": {
+                          "entity_id": "light.kitchen"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_0e82ed7f-cc21-4edc-94d1-a4e489cb3dbe",
+                    "function": {
+                      "arguments": "{\"domain\":\"light\",\"service\":\"turn_off\",\"service_data\":{\"entity_id\":\"light.kitchen\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -31,15 +31,13 @@ class ReportGenerator:
         output_dir = self.eval_config.get("report_dir")
         os.makedirs(output_dir, exist_ok=True)
 
-        # Generate filename with timestamp
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"evaluation_report_{timestamp}.json"
-        report_path = os.path.join(output_dir, filename)
+        # Generate filename
+        report_path = os.path.join(output_dir, "evaluation_report.json")
 
         # Save report to file
         try:
             with open(report_path, "w") as f:
-                json.dump(report_data, f, indent=2)
+                json.dump(report_data, f, indent=2, ensure_ascii=False)
             logger.info(f"Report generated successfully: {report_path}")
             return report_path
         except Exception as e:

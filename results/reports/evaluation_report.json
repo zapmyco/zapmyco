@@ -1,0 +1,241 @@
+{
+  "title": "Zapmyco Home Agent Evaluation Report",
+  "timestamp": "2025-04-17 13:37:12",
+  "agent": {
+    "name": "zapmyco",
+    "version": "1.0.0"
+  },
+  "summary": {
+    "total_tests": 2,
+    "passed": 0,
+    "failed": 2,
+    "success_rate": 0.0
+  },
+  "metrics": {
+    "overall_success_rate": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "errors": 0,
+      "rate": 0.0
+    },
+    "category_success_rates": {
+      "intent_understanding": {
+        "total": 2,
+        "passed": 0,
+        "failed": 2,
+        "errors": 0,
+        "rate": 0.0
+      }
+    },
+    "response_times": {
+      "min": 6.587,
+      "max": 19.581,
+      "avg": 13.084,
+      "median": 19.581,
+      "p90": 19.581,
+      "p95": 19.581,
+      "total_count": 2
+    },
+    "feature_coverage": {
+      "total_features": 2,
+      "features": {
+        "basic_command": {
+          "total": 2,
+          "passed": 0,
+          "rate": 0.0
+        },
+        "lighting": {
+          "total": 2,
+          "passed": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "complex_instruction_rate": {
+      "count": 0,
+      "total": 2,
+      "percentage": 0.0
+    },
+    "average_response_time": {
+      "average": 13.084,
+      "min": 6.587,
+      "max": 19.581,
+      "count": 2
+    }
+  },
+  "category_results": [
+    {
+      "name": "intent_understanding",
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "error": 0,
+      "success_rate": 0.0
+    }
+  ],
+  "test_details": [
+    {
+      "test_id": "intent_basic_001",
+      "category": "intent_understanding",
+      "description": "基础灯光控制-开灯",
+      "status": "failed",
+      "duration": 19.58133888244629,
+      "tags": [
+        "lighting",
+        "basic_command"
+      ],
+      "difficulty": "easy",
+      "input_summary": {
+        "text": "打开客厅灯"
+      },
+      "comparison_summary": {
+        "choices": {
+          "status": "mismatch",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "light",
+                        "service": "turn_on",
+                        "service_data": {
+                          "entity_id": "light.living_room"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_e015229c-e76e-4887-b6c9-3504a11a1425",
+                    "function": {
+                      "arguments": "{\"domain\":\"light\",\"service\":\"turn_on\",\"service_data\":{\"entity_id\":\"light.living_room\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "has_error": false
+    },
+    {
+      "test_id": "intent_basic_002",
+      "category": "intent_understanding",
+      "description": "基础灯光控制-关灯",
+      "status": "failed",
+      "duration": 6.586905241012573,
+      "tags": [
+        "lighting",
+        "basic_command"
+      ],
+      "difficulty": "easy",
+      "input_summary": {
+        "text": "关闭厨房灯"
+      },
+      "comparison_summary": {
+        "choices": {
+          "status": "mismatch",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "light",
+                        "service": "turn_on",
+                        "service_data": {
+                          "entity_id": "light.kitchen"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_0e82ed7f-cc21-4edc-94d1-a4e489cb3dbe",
+                    "function": {
+                      "arguments": "{\"domain\":\"light\",\"service\":\"turn_off\",\"service_data\":{\"entity_id\":\"light.kitchen\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "has_error": false
+    }
+  ],
+  "chart_data": {
+    "categories": {
+      "labels": [
+        "intent_understanding"
+      ],
+      "success_rates": [
+        0.0
+      ]
+    },
+    "difficulties": {
+      "labels": [
+        "easy"
+      ],
+      "success_rates": [
+        0.0
+      ],
+      "counts": [
+        2
+      ]
+    },
+    "tags": {
+      "labels": [
+        "lighting",
+        "basic_command"
+      ],
+      "success_rates": [
+        0.0,
+        0.0
+      ],
+      "counts": [
+        2,
+        2
+      ]
+    }
+  },
+  "duration": "26.38 seconds"
+}
