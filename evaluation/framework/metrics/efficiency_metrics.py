@@ -111,3 +111,50 @@ class EfficiencyMetrics:
             }
 
         return metrics
+
+
+if __name__ == "__main__":
+    # Example usage of EfficiencyMetrics
+    from datetime import datetime, timedelta
+
+    # Create sample test results with timestamps
+    base_time = datetime.now()
+    example_results = [
+        {
+            "duration": 0.5,
+            "timestamp": (base_time + timedelta(seconds=i)).isoformat(),
+            "memory_usage": 100 + i * 10,
+            "cpu_usage": 50 + i * 5,
+        }
+        for i in range(5)
+    ]
+
+    # Calculate response time statistics
+    response_stats = EfficiencyMetrics.calculate_response_time_stats(example_results)
+    print("\nResponse Time Statistics:")
+    print(f"Min: {response_stats['min']} seconds")
+    print(f"Max: {response_stats['max']} seconds")
+    print(f"Mean: {response_stats['mean']} seconds")
+    print(f"Median: {response_stats['median']} seconds")
+    print(f"Standard Deviation: {response_stats['std_dev']} seconds")
+
+    # Calculate throughput metrics
+    throughput = EfficiencyMetrics.calculate_throughput(example_results)
+    print("\nThroughput Metrics:")
+    print(f"Requests per second: {throughput['requests_per_second']}")
+    print(f"Total requests: {throughput['total_requests']}")
+
+    # Calculate resource utilization
+    resource_metrics = EfficiencyMetrics.calculate_resource_utilization(example_results)
+    print("\nResource Utilization:")
+    if "memory" in resource_metrics:
+        print("\nMemory Usage:")
+        print(f"Average: {resource_metrics['memory']['avg']}MB")
+        print(f"Maximum: {resource_metrics['memory']['max']}MB")
+        print(f"Minimum: {resource_metrics['memory']['min']}MB")
+
+    if "cpu" in resource_metrics:
+        print("\nCPU Usage:")
+        print(f"Average: {resource_metrics['cpu']['avg']}%")
+        print(f"Maximum: {resource_metrics['cpu']['max']}%")
+        print(f"Minimum: {resource_metrics['cpu']['min']}%")

@@ -172,3 +172,117 @@ class UserExperienceMetrics:
             }
 
         return metrics
+
+
+if __name__ == "__main__":
+    # Example usage of UserExperienceMetrics
+    example_results = [
+        {
+            "interaction_time": 2.5,
+            "interaction_steps": 3,
+            "satisfaction_score": 4,
+            "feedback": "easy to use",
+            "task_completed": True,
+            "user_errors": 0,
+            "task_completion_time": 45,
+            "accessibility": {
+                "score": 90,
+                "criteria": {
+                    "keyboard_navigation": 95,
+                    "screen_reader": 85,
+                    "color_contrast": 90,
+                },
+            },
+        },
+        {
+            "interaction_time": 3.8,
+            "interaction_steps": 5,
+            "satisfaction_score": 3,
+            "feedback": "slightly confusing",
+            "task_completed": True,
+            "user_errors": 2,
+            "task_completion_time": 65,
+            "accessibility": {
+                "score": 85,
+                "criteria": {
+                    "keyboard_navigation": 90,
+                    "screen_reader": 80,
+                    "color_contrast": 85,
+                },
+            },
+        },
+        {
+            "interaction_time": 1.9,
+            "interaction_steps": 2,
+            "satisfaction_score": 5,
+            "feedback": "excellent",
+            "task_completed": True,
+            "user_errors": 0,
+            "task_completion_time": 30,
+            "accessibility": {
+                "score": 95,
+                "criteria": {
+                    "keyboard_navigation": 100,
+                    "screen_reader": 90,
+                    "color_contrast": 95,
+                },
+            },
+        },
+    ]
+
+    # Calculate interaction metrics
+    interaction_metrics = UserExperienceMetrics.calculate_interaction_metrics(
+        example_results
+    )
+    print("\nInteraction Metrics:")
+    if "response_times" in interaction_metrics:
+        print("\nResponse Times:")
+        print(f"Average: {interaction_metrics['response_times']['avg']} seconds")
+        print(f"Median: {interaction_metrics['response_times']['median']} seconds")
+        print(
+            f"95th Percentile: {interaction_metrics['response_times']['p95']} seconds"
+        )
+
+    if "interaction_steps" in interaction_metrics:
+        print("\nInteraction Steps:")
+        print(f"Average: {interaction_metrics['interaction_steps']['avg']} steps")
+        print(f"Min: {interaction_metrics['interaction_steps']['min']} steps")
+        print(f"Max: {interaction_metrics['interaction_steps']['max']} steps")
+
+    # Calculate satisfaction metrics
+    satisfaction = UserExperienceMetrics.calculate_satisfaction_metrics(example_results)
+    print("\nSatisfaction Metrics:")
+    if "satisfaction" in satisfaction:
+        print(f"Average Score: {satisfaction['satisfaction']['avg_score']}")
+        print(f"Median Score: {satisfaction['satisfaction']['median_score']}")
+        print("\nScore Distribution:")
+        for score, count in satisfaction["satisfaction"]["score_distribution"].items():
+            print(f"Score {score}: {count} responses")
+
+    if "feedback" in satisfaction:
+        print("\nFeedback Summary:")
+        for feedback, count in satisfaction["feedback"].items():
+            print(f"{feedback}: {count} responses")
+
+    # Calculate usability metrics
+    usability = UserExperienceMetrics.calculate_usability_metrics(example_results)
+    print("\nUsability Metrics:")
+    print(f"Task Completion Rate: {usability['task_completion_rate']}%")
+    print(f"Error Rate: {usability['error_rate']}%")
+
+    if "completion_time" in usability:
+        print("\nCompletion Time:")
+        print(f"Average: {usability['completion_time']['avg']} seconds")
+        print(f"Median: {usability['completion_time']['median']} seconds")
+        print(f"Standard Deviation: {usability['completion_time']['std_dev']} seconds")
+
+    # Calculate accessibility metrics
+    accessibility = UserExperienceMetrics.calculate_accessibility_score(example_results)
+    print("\nAccessibility Metrics:")
+    if "overall_score" in accessibility:
+        print(f"Overall Score: {accessibility['overall_score']}")
+
+    if "criteria_scores" in accessibility:
+        print("\nCriteria Scores:")
+        for criterion, score in accessibility["criteria_scores"].items():
+            print(f"{criterion}: {score}")

@@ -81,3 +81,31 @@ class AccuracyMetrics:
             return 0.0
         errors = sum(1 for r in results if r.get("status") in ["failed", "error"])
         return round(errors / total, 3)
+
+
+if __name__ == "__main__":
+    # Example usage of AccuracyMetrics
+    example_results = [
+        {"status": "passed", "expected_output": "Hello", "actual_output": "Hello"},
+        {
+            "status": "passed",
+            "expected_output": "World",
+            "actual_output": "world",  # Case mismatch
+        },
+        {"status": "failed", "expected_output": "Test", "actual_output": "Error"},
+        {"status": "error", "expected_output": "Data", "actual_output": None},
+    ]
+
+    # Calculate accuracy metrics
+    accuracy_metrics = AccuracyMetrics.calculate_accuracy(example_results)
+    print("\nAccuracy Metrics:")
+    print(f"Precision: {accuracy_metrics['precision']}")
+    print(f"Recall: {accuracy_metrics['recall']}")
+    print(f"F1 Score: {accuracy_metrics['f1_score']}")
+    print(f"True Positives: {accuracy_metrics['true_positives']}")
+    print(f"False Positives: {accuracy_metrics['false_positives']}")
+    print(f"False Negatives: {accuracy_metrics['false_negatives']}")
+
+    # Calculate error rate
+    error_rate = AccuracyMetrics.calculate_error_rate(example_results)
+    print(f"\nError Rate: {error_rate}")

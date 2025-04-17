@@ -315,3 +315,146 @@ class MetricCalculator:
 
         # Default return if metric type not recognized
         return {"error": f"Unknown metric type: {metric_type}"}
+
+
+if __name__ == "__main__":
+    # 配置示例
+    metrics_config = {
+        "enabled_metrics": [
+            "overall_success_rate",
+            "category_success_rates",
+            "response_times",
+            "accuracy_metrics",
+            "feature_coverage",
+        ],
+        "custom_metrics": [
+            {
+                "name": "critical_errors",
+                "type": "filter_count",
+                "filter_field": "severity",
+                "filter_value": "critical",
+            },
+            {
+                "name": "average_memory",
+                "type": "average_field",
+                "field": "memory_usage",
+            },
+        ],
+    }
+
+    # 创建示例测试结果
+    example_results = [
+        {
+            "status": "passed",
+            "category": "api",
+            "duration": 1.2,
+            "tags": ["auth", "user"],
+            "severity": "normal",
+            "memory_usage": 100,
+            "expected_output": {"execution": True},
+            "comparison": {"execution": {"success": True}},
+            "timestamp": "2024-03-15T10:00:00",
+        },
+        {
+            "status": "failed",
+            "category": "ui",
+            "duration": 2.5,
+            "tags": ["frontend", "user"],
+            "severity": "critical",
+            "memory_usage": 150,
+            "expected_output": {"execution": True},
+            "comparison": {"execution": {"success": False}},
+            "timestamp": "2024-03-15T10:01:00",
+        },
+        {
+            "status": "passed",
+            "category": "api",
+            "duration": 0.8,
+            "tags": ["data", "query"],
+            "severity": "normal",
+            "memory_usage": 90,
+            "expected_output": {"execution": True},
+            "comparison": {"execution": {"success": True}},
+            "timestamp": "2024-03-15T10:02:00",
+        },
+        {
+            "status": "error",
+            "category": "integration",
+            "duration": 3.0,
+            "tags": ["database", "sync"],
+            "severity": "critical",
+            "memory_usage": 200,
+            "expected_output": {"execution": True},
+            "comparison": {"execution": {"success": False}},
+            "timestamp": "2024-03-15T10:03:00",
+        },
+    ]
+
+    # 创建 MetricCalculator 实例
+    calculator = MetricCalculator(metrics_config)
+
+    # 计算所有指标
+    metrics = calculator.calculate_all_metrics(example_results)
+
+    # 打印结果
+    print("\n=== Metric Calculator Example ===")
+
+    # 1. 总体成功率
+    if "overall_success_rate" in metrics:
+        print("\nOverall Success Rate:")
+        success_rate = metrics["overall_success_rate"]
+        print(f"Total Tests: {success_rate['total']}")
+        print(f"Passed: {success_rate['passed']}")
+        print(f"Failed: {success_rate['failed']}")
+        print(f"Errors: {success_rate['errors']}")
+        print(f"Success Rate: {success_rate['rate']}%")
+
+    # 2. 分类成功率
+    if "category_success_rates" in metrics:
+        print("\nCategory Success Rates:")
+        for category, stats in metrics["category_success_rates"].items():
+            print(f"\n{category.upper()}:")
+            print(f"Total: {stats['total']}")
+            print(f"Passed: {stats['passed']}")
+            print(f"Failed: {stats['failed']}")
+            print(f"Errors: {stats['errors']}")
+            print(f"Success Rate: {stats['rate']}%")
+
+    # 3. 响应时间
+    if "response_times" in metrics:
+        print("\nResponse Times:")
+        response_times = metrics["response_times"]
+        print(f"Minimum: {response_times['min']} seconds")
+        print(f"Maximum: {response_times['max']} seconds")
+        print(f"Average: {response_times['avg']} seconds")
+        print(f"Median: {response_times['median']} seconds")
+        print(f"90th Percentile: {response_times['p90']} seconds")
+        print(f"95th Percentile: {response_times['p95']} seconds")
+
+    # 4. 特性覆盖率
+    if "feature_coverage" in metrics:
+        print("\nFeature Coverage:")
+        coverage = metrics["feature_coverage"]
+        print(f"Total Features: {coverage['total_features']}")
+        print("\nFeature Details:")
+        for feature, stats in coverage["features"].items():
+            print(f"\n{feature}:")
+            print(f"Total Tests: {stats['total']}")
+            print(f"Passed Tests: {stats['passed']}")
+            print(f"Success Rate: {stats['rate']}%")
+
+    # 5. 自定义指标
+    if "critical_errors" in metrics:
+        print("\nCritical Errors:")
+        critical = metrics["critical_errors"]
+        print(f"Count: {critical['count']}")
+        print(f"Total: {critical['total']}")
+        print(f"Percentage: {critical['percentage']}%")
+
+    if "average_memory" in metrics:
+        print("\nMemory Usage:")
+        memory = metrics["average_memory"]
+        print(f"Average: {memory['average']} MB")
+        print(f"Minimum: {memory['min']} MB")
+        print(f"Maximum: {memory['max']} MB")
+        print(f"Sample Count: {memory['count']}")

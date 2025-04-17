@@ -138,3 +138,42 @@ class RobustnessMetrics:
                 }
 
         return tolerance_metrics
+
+
+if __name__ == "__main__":
+    # Example usage of RobustnessMetrics
+    example_results = [
+        {"status": "passed", "error_type": None, "load_level": "normal"},
+        {"status": "failed", "error_type": "timeout", "load_level": "high"},
+        {"status": "error", "error_type": "connection", "load_level": "normal"},
+        {"status": "passed", "error_type": None, "load_level": "low"},
+        {"status": "failed", "error_type": "validation", "load_level": "high"},
+        {"status": "passed", "error_type": None, "load_level": "normal"},
+        {"status": "error", "error_type": "connection", "load_level": "high"},
+        {"status": "passed", "error_type": None, "load_level": "normal"},
+    ]
+
+    # Calculate error distribution
+    error_dist = RobustnessMetrics.calculate_error_distribution(example_results)
+    print("\nError Distribution:")
+    print(f"Total Errors: {error_dist['total_errors']}")
+    print("\nError Types:")
+    for error_type, stats in error_dist["error_types"].items():
+        print(f"{error_type}: {stats['count']} occurrences ({stats['percentage']}%)")
+
+    # Calculate stability metrics
+    stability = RobustnessMetrics.calculate_stability_score(example_results)
+    print("\nStability Metrics:")
+    print(f"Overall Stability Score: {stability['stability_score']}")
+    print(f"Consistency Score: {stability['consistency_score']}")
+    print(f"Recovery Rate: {stability['recovery_rate']}")
+    print(f"Max Consecutive Failures: {stability['max_consecutive_failures']}")
+
+    # Calculate load tolerance
+    load_tolerance = RobustnessMetrics.calculate_load_tolerance(example_results)
+    print("\nLoad Tolerance by Level:")
+    for level, metrics in load_tolerance.items():
+        print(f"\n{level.upper()} Load:")
+        print(f"Success Rate: {metrics['success_rate']}%")
+        print(f"Total Tests: {metrics['total_tests']}")
+        print(f"Average Response Time: {metrics['avg_response_time']} seconds")
