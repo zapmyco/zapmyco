@@ -17,6 +17,7 @@ from evaluation.framework.utils.result_processor import process_results
 from zapmyco.integrations.home_assistant.context_provider import MockContextProvider
 from zapmyco.integrations.home_assistant.mcp import HomeAssistantMCP
 from zapmyco.integrations.home_assistant.client import HomeAssistantClient
+from contextlib import asynccontextmanager
 
 logger = logging.getLogger(__name__)
 
@@ -57,6 +58,19 @@ class Evaluator:
         logger.info(
             f"Evaluator initialized with timeout={self.timeout}s, parallel={self.parallel}"
         )
+
+    @asynccontextmanager
+    async def _get_ha_client(self):
+        """
+        Context manager for handling HomeAssistantClient lifecycle
+        """
+        client = HomeAssistantClient()
+        try:
+            await client.connect()
+            yield client
+        finally:
+            await client.disconnect()
+            await asyncio.sleep(0.1)  # 给予一些时间让资源清理完成
 
     async def run_evaluation(self) -> Dict[str, Any]:
         """
@@ -186,13 +200,7 @@ class Evaluator:
             mock_context = test_case.get("mock_context", {})
             mock_provider = MockContextProvider(mock_context)
 
-            # 创建 Home Assistant 客户端
-            ha_client = HomeAssistantClient()
-            try:
-                # 连接到 Home Assistant
-                if not await ha_client.connect():
-                    raise ConnectionError("Failed to connect to Home Assistant")
-
+            async with self._get_ha_client() as ha_client:
                 # 更新 agent 的 MCP 实例
                 self.agent_connector.agent.ha_mcp = HomeAssistantMCP(
                     ha_client, context_provider=mock_provider
@@ -222,10 +230,6 @@ class Evaluator:
                     "tags": test_case.get("tags", []),
                     "difficulty": test_case.get("difficulty", "medium"),
                 }
-
-            finally:
-                # 确保关闭 Home Assistant 客户端
-                await ha_client.disconnect()
 
         except Exception as e:
             logger.error(f"Error executing test {test_id}: {e}")
@@ -321,10 +325,14 @@ class Evaluator:
         elif isinstance(expected, list):
             if len(expected) != len(actual):
                 return False
-            return all(
-                await self._compare_field_values(exp, act)
-                for exp, act in zip(expected, actual)
+            # 使用asyncio.gather收集所有比较结果
+            comparison_results = await asyncio.gather(
+                *(
+                    self._compare_field_values(exp, act)
+                    for exp, act in zip(expected, actual)
+                )
             )
+            return all(comparison_results)
         else:
             # Direct comparison for basic types
             return expected == actual

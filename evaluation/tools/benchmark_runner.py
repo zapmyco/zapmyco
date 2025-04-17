@@ -49,62 +49,46 @@ class BenchmarkRunner:
             f"({self.warmup_iterations} warmup)"
         )
 
-    def run(self) -> Dict[str, Any]:
+    async def run(self) -> Dict[str, Any]:
         """
-        Run benchmarks
+        Run benchmarks on all test cases
 
         Returns:
-            Dict with benchmark results
+            Dict containing benchmark results
         """
-        start_time = time.time()
-
-        # Load benchmark test cases
-        benchmark_file = self.eval_config.get("benchmark_file", "benchmark_tests.jsonl")
-        benchmark_dataset = self.eval_config.get("benchmark_dataset", "core")
-
+        # Load test cases
         test_cases = load_dataset(
-            dataset_name=benchmark_dataset,
-            test_file=benchmark_file,
+            dataset_name=self.eval_config.get("dataset"),
+            test_file=self.eval_config.get("test_file"),
             datasets_dir=self.eval_config.get("datasets_dir", "datasets"),
         )
 
-        if not test_cases:
-            logger.warning("No benchmark test cases found")
-            return {"error": "No benchmark test cases found"}
+        start_time = time.time()
+        results = []
 
-        logger.info(
-            f"Running benchmarks with {len(test_cases)} test cases, "
-            f"{self.iterations} iterations each"
-        )
-
-        # Run benchmarks
-        benchmark_results = []
-
+        # Run benchmarks for each test case
         for test_case in test_cases:
-            test_id = test_case.get("test_id", "unknown")
-            category = test_case.get("category", "unknown")
-
-            logger.info(f"Benchmarking test {test_id} ({category})")
-
-            # Run benchmark for this test case
-            result = self._benchmark_test_case(test_case)
-            benchmark_results.append(result)
+            result = await self._benchmark_test_case(test_case)
+            results.append(result)
 
         # Calculate overall statistics
-        overall_stats = self._calculate_overall_stats(benchmark_results)
+        all_times = []
+        for result in results:
+            all_times.extend(result.get("times", []))
 
-        # Prepare final results
+        overall_stats = self._calculate_stats(all_times)
+
+        # Prepare results
         results = {
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "duration": time.time() - start_time,
             "config": {
-                "agent": self.agent_config.get("name", "zapmyco"),
-                "version": self.agent_config.get("version", "unknown"),
                 "iterations": self.iterations,
                 "warmup_iterations": self.warmup_iterations,
+                "timeout": self.timeout,
             },
-            "overall": overall_stats,
-            "test_results": benchmark_results,
+            "overall_stats": overall_stats,
+            "test_results": results,
         }
 
         # Save results
@@ -115,7 +99,7 @@ class BenchmarkRunner:
 
         return results
 
-    def _benchmark_test_case(self, test_case: Dict[str, Any]) -> Dict[str, Any]:
+    async def _benchmark_test_case(self, test_case: Dict[str, Any]) -> Dict[str, Any]:
         """
         Run benchmark for a single test case
 
@@ -139,7 +123,9 @@ class BenchmarkRunner:
                 f"Warmup iteration {i+1}/{self.warmup_iterations} for {test_id}"
             )
             try:
-                self.agent_connector.send_request(input_data, timeout=self.timeout)
+                await self.agent_connector.send_request(
+                    input_data, timeout=self.timeout
+                )
             except Exception as e:
                 logger.warning(f"Error during warmup: {e}")
 
@@ -149,7 +135,7 @@ class BenchmarkRunner:
 
             try:
                 start_time = time.time()
-                response = self.agent_connector.send_request(
+                response = await self.agent_connector.send_request(
                     input_data, timeout=self.timeout
                 )
                 end_time = time.time()
@@ -169,98 +155,34 @@ class BenchmarkRunner:
 
         return {
             "test_id": test_id,
-            "category": test_case.get("category", "unknown"),
-            "description": test_case.get("description", ""),
-            "stats": stats,
-            "success_rate": (
-                (len(times) / self.iterations) * 100 if self.iterations > 0 else 0
-            ),
+            "times": times,
+            "responses": responses,
             "errors": errors,
-            "responses": (
-                responses if self.eval_config.get("save_responses", False) else None
-            ),
+            "stats": stats,
         }
 
     def _calculate_stats(self, times: List[float]) -> Dict[str, float]:
-        """
-        Calculate statistics from response times
-
-        Args:
-            times: List of response times
-
-        Returns:
-            Dict with statistics
-        """
+        """Calculate statistics from a list of times"""
         if not times:
             return {
-                "min": 0,
-                "max": 0,
-                "mean": 0,
-                "median": 0,
-                "stdev": 0,
-                "p90": 0,
-                "p95": 0,
-                "samples": 0,
+                "mean_time": 0,
+                "median_time": 0,
+                "min_time": 0,
+                "max_time": 0,
+                "std_dev": 0,
             }
 
-        times.sort()
-
         return {
-            "min": round(min(times), 3),
-            "max": round(max(times), 3),
-            "mean": round(statistics.mean(times), 3),
-            "median": round(statistics.median(times), 3),
-            "stdev": round(statistics.stdev(times), 3) if len(times) > 1 else 0,
-            "p90": round(times[int(len(times) * 0.9)], 3),
-            "p95": round(times[int(len(times) * 0.95)], 3),
-            "samples": len(times),
-        }
-
-    def _calculate_overall_stats(self, results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Calculate overall statistics from all benchmark results
-
-        Args:
-            results: List of benchmark results
-
-        Returns:
-            Dict with overall statistics
-        """
-        # Collect all times
-        all_times = []
-        for result in results:
-            times = [
-                result["stats"].get("min", 0),
-                result["stats"].get("max", 0),
-                result["stats"].get("mean", 0),
-            ]
-            all_times.extend([t for t in times if t > 0])
-
-        # Calculate success rate
-        total_iterations = len(results) * self.iterations
-        successful_iterations = sum(
-            result["stats"].get("samples", 0) for result in results
-        )
-        success_rate = (
-            (successful_iterations / total_iterations) * 100
-            if total_iterations > 0
-            else 0
-        )
-
-        return {
-            "total_tests": len(results),
-            "total_iterations": total_iterations,
-            "successful_iterations": successful_iterations,
-            "success_rate": round(success_rate, 2),
-            "min_time": round(min(all_times), 3) if all_times else 0,
-            "max_time": round(max(all_times), 3) if all_times else 0,
-            "mean_time": round(statistics.mean(all_times), 3) if all_times else 0,
-            "median_time": round(statistics.median(all_times), 3) if all_times else 0,
+            "mean_time": statistics.mean(times),
+            "median_time": statistics.median(times),
+            "min_time": min(times),
+            "max_time": max(times),
+            "std_dev": statistics.stdev(times) if len(times) > 1 else 0,
         }
 
     def _save_results(self, results: Dict[str, Any]) -> None:
         """Save benchmark results to file"""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
         filename = f"{self.output_dir}/benchmark_{timestamp}.json"
 
         with open(filename, "w") as f:

@@ -3,7 +3,6 @@ Agent Connector - Handles communication with the Zapmyco Home Agent
 """
 
 import logging
-import asyncio
 from typing import Dict, Any, Optional
 
 from zapmyco.app import ZapmycoAgent
@@ -39,7 +38,7 @@ class AgentConnector:
             self._initialized = True
             logger.info("Agent connector initialized successfully")
 
-    def send_request(
+    async def send_request(
         self, data: Dict[str, Any], timeout: Optional[int] = None
     ) -> Dict[str, Any]:
         """
@@ -53,14 +52,9 @@ class AgentConnector:
             The agent's response
         """
         try:
-
-            async def _process():
-                if not self._initialized:
-                    await self.initialize()
-                return await self.agent.process_request(data.get("text"))
-
-            result = asyncio.run(_process())
-            return result
+            if not self._initialized:
+                await self.initialize()
+            return await self.agent.process_request(data.get("text"))
         except Exception as e:
             logger.error(f"Error processing request: {str(e)}")
             raise ValueError(f"Failed to process request: {str(e)}")
