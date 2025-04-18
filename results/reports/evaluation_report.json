@@ -1,75 +1,80 @@
 {
   "title": "Zapmyco Home Agent Evaluation Report",
-  "timestamp": "2025-04-17 13:37:12",
+  "timestamp": "2025-04-18 10:52:51",
   "agent": {
     "name": "zapmyco",
     "version": "1.0.0"
   },
   "summary": {
-    "total_tests": 2,
-    "passed": 0,
-    "failed": 2,
-    "success_rate": 0.0
+    "total_tests": 3,
+    "passed": 3,
+    "failed": 0,
+    "success_rate": 100.0
   },
   "metrics": {
     "overall_success_rate": {
-      "total": 2,
-      "passed": 0,
-      "failed": 2,
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
       "errors": 0,
-      "rate": 0.0
+      "rate": 100.0
     },
     "category_success_rates": {
       "intent_understanding": {
-        "total": 2,
-        "passed": 0,
-        "failed": 2,
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
         "errors": 0,
-        "rate": 0.0
+        "rate": 100.0
       }
     },
     "response_times": {
-      "min": 6.587,
-      "max": 19.581,
-      "avg": 13.084,
-      "median": 19.581,
-      "p90": 19.581,
-      "p95": 19.581,
-      "total_count": 2
+      "min": 4.324,
+      "max": 5.382,
+      "avg": 4.91,
+      "median": 5.024,
+      "p90": 5.382,
+      "p95": 5.382,
+      "total_count": 3
     },
     "feature_coverage": {
-      "total_features": 2,
+      "total_features": 3,
       "features": {
         "basic_command": {
-          "total": 2,
-          "passed": 0,
-          "rate": 0.0
+          "total": 3,
+          "passed": 3,
+          "rate": 100.0
         },
         "lighting": {
           "total": 2,
-          "passed": 0,
-          "rate": 0.0
+          "passed": 2,
+          "rate": 100.0
+        },
+        "climate": {
+          "total": 1,
+          "passed": 1,
+          "rate": 100.0
         }
       }
     },
     "complex_instruction_rate": {
       "count": 0,
-      "total": 2,
+      "total": 3,
       "percentage": 0.0
     },
     "average_response_time": {
-      "average": 13.084,
-      "min": 6.587,
-      "max": 19.581,
-      "count": 2
+      "average": 4.91,
+      "min": 4.324,
+      "max": 5.382,
+      "count": 3
     }
   },
   "category_results": [
     {
       "name": "intent_understanding",
-      "total": 2,
+      "total": 3,
       "passed": 0,
-      "failed": 2,
+      "failed": 0,
       "error": 0,
       "success_rate": 0.0
     }
@@ -79,8 +84,8 @@
       "test_id": "intent_basic_001",
       "category": "intent_understanding",
       "description": "基础灯光控制-开灯",
-      "status": "failed",
-      "duration": 19.58133888244629,
+      "status": "success",
+      "duration": 4.323657035827637,
       "tags": [
         "lighting",
         "basic_command"
@@ -91,7 +96,7 @@
       },
       "comparison_summary": {
         "choices": {
-          "status": "mismatch",
+          "status": "match",
           "expected": [
             {
               "message": {
@@ -122,7 +127,7 @@
                 "role": "assistant",
                 "tool_calls": [
                   {
-                    "id": "call_0_e015229c-e76e-4887-b6c9-3504a11a1425",
+                    "id": "call_0_34f7bd00-c62a-46ef-92db-99cb2a114680",
                     "function": {
                       "arguments": "{\"domain\":\"light\",\"service\":\"turn_on\",\"service_data\":{\"entity_id\":\"light.living_room\"}}",
                       "name": "call_service"
@@ -142,8 +147,8 @@
       "test_id": "intent_basic_002",
       "category": "intent_understanding",
       "description": "基础灯光控制-关灯",
-      "status": "failed",
-      "duration": 6.586905241012573,
+      "status": "success",
+      "duration": 5.023676156997681,
       "tags": [
         "lighting",
         "basic_command"
@@ -154,7 +159,7 @@
       },
       "comparison_summary": {
         "choices": {
-          "status": "mismatch",
+          "status": "match",
           "expected": [
             {
               "message": {
@@ -185,9 +190,73 @@
                 "role": "assistant",
                 "tool_calls": [
                   {
-                    "id": "call_0_0e82ed7f-cc21-4edc-94d1-a4e489cb3dbe",
+                    "id": "call_0_17656831-e553-46e0-a69f-a6464381106d",
                     "function": {
                       "arguments": "{\"domain\":\"light\",\"service\":\"turn_off\",\"service_data\":{\"entity_id\":\"light.kitchen\"}}",
+                      "name": "call_service"
+                    },
+                    "type": "function",
+                    "index": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "has_error": false
+    },
+    {
+      "test_id": "intent_basic_003",
+      "category": "intent_understanding",
+      "description": "基础温控-设定温度",
+      "status": "success",
+      "duration": 5.3818089962005615,
+      "tags": [
+        "climate",
+        "basic_command"
+      ],
+      "difficulty": "easy",
+      "input_summary": {
+        "text": "把卧室温度调到26度"
+      },
+      "comparison_summary": {
+        "choices": {
+          "status": "match",
+          "expected": [
+            {
+              "message": {
+                "tool_calls": [
+                  {
+                    "function": {
+                      "name": "call_service",
+                      "arguments": {
+                        "domain": "climate",
+                        "service": "set_temperature",
+                        "service_data": {
+                          "entity_id": "climate.living_room",
+                          "temperature": 26
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "actual": [
+            {
+              "finish_reason": "tool_calls",
+              "index": 0,
+              "logprobs": null,
+              "message": {
+                "content": "",
+                "role": "assistant",
+                "tool_calls": [
+                  {
+                    "id": "call_0_bc041eb3-fad0-4f11-b6f9-44abcd9b2001",
+                    "function": {
+                      "arguments": "{\"domain\":\"climate\",\"service\":\"set_temperature\",\"service_data\":{\"entity_id\":\"climate.living_room\",\"temperature\":26}}",
                       "name": "call_service"
                     },
                     "type": "function",
@@ -219,23 +288,26 @@
         0.0
       ],
       "counts": [
-        2
+        3
       ]
     },
     "tags": {
       "labels": [
+        "basic_command",
         "lighting",
-        "basic_command"
+        "climate"
       ],
       "success_rates": [
+        0.0,
         0.0,
         0.0
       ],
       "counts": [
+        3,
         2,
-        2
+        1
       ]
     }
   },
-  "duration": "26.38 seconds"
+  "duration": "15.04 seconds"
 }

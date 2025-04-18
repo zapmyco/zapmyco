@@ -19,6 +19,7 @@
     "homeassistant",
     "htmlcov",
     "httpx",
+    "hvac",
     "ipynb",
     "ipython",
     "jieba",

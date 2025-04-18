@@ -65,7 +65,7 @@ class LLMService:
                         "properties": {
                             "domain": {
                                 "type": "string",
-                                "enum": ["light", "switch", "camera"],
+                                "enum": ["light", "switch", "camera", "climate"],
                                 "description": "服务域名，只能是 light、switch 或 camera",
                             },
                             "service": {
@@ -75,6 +75,7 @@ class LLMService:
                                     "turn_off",
                                     "set_color",
                                     "set_brightness",
+                                    "set_temperature",
                                 ],
                                 "description": "设备服务",
                             },
@@ -85,6 +86,22 @@ class LLMService:
                                     "entity_id": {
                                         "type": "string",
                                         "description": "设备ID",
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "description": "颜色，只能是 red、green 或 blue",
+                                    },
+                                    "brightness": {
+                                        "type": "integer",
+                                        "description": "亮度，只能是 0-100",
+                                    },
+                                    "temperature": {
+                                        "type": "integer",
+                                        "description": "温度，只能是 16-30",
+                                    },
+                                    "hvac_mode": {
+                                        "type": "string",
+                                        "description": "HVAC 模式，只能是 heat、cool 或 auto",
                                     },
                                 },
                             },

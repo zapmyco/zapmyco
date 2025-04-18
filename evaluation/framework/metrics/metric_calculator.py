@@ -92,7 +92,11 @@ class MetricCalculator:
             Dict with success rate metrics
         """
         total = len(results)
-        passed = sum(1 for r in results if r.get("status") == "passed")
+        passed = sum(
+            1
+            for r in results
+            if r.get("status") == "passed" or r.get("status") == "success"
+        )
         failed = sum(1 for r in results if r.get("status") == "failed")
         errors = sum(1 for r in results if r.get("status") == "error")
 
@@ -135,7 +139,7 @@ class MetricCalculator:
 
             categories[category]["total"] += 1
             status = result.get("status", "unknown")
-            if status == "passed":
+            if status == "passed" or status == "success":
                 categories[category]["passed"] += 1
             elif status == "failed":
                 categories[category]["failed"] += 1
@@ -253,7 +257,11 @@ class MetricCalculator:
         tag_stats = {}
         for tag in all_tags:
             tag_tests = [r for r in results if tag in r.get("tags", [])]
-            passed = sum(1 for r in tag_tests if r.get("status") == "passed")
+            passed = sum(
+                1
+                for r in tag_tests
+                if r.get("status") == "passed" or r.get("status") == "success"
+            )
 
             tag_stats[tag] = {
                 "total": len(tag_tests),
