@@ -5,7 +5,8 @@ Agent Connector - Handles communication with the Zapmyco Home Agent
 import logging
 from typing import Dict, Any, Optional
 
-from zapmyco.app import ZapmycoAgent
+# 导入模拟 Agent 而不是真实的 Agent
+from evaluation.framework.mock.mock_agent import MockZapmycoAgent
 from zapmyco.llm import LLMService
 
 logger = logging.getLogger(__name__)
@@ -25,9 +26,10 @@ class AgentConnector:
         """
         self.config = config
         self.llm_service = LLMService()
-        self.agent = ZapmycoAgent(self.llm_service)
+        # 使用模拟 Agent 而不是真实的 ZapmycoAgent
+        self.agent = MockZapmycoAgent(self.llm_service)
         self._initialized = False
-        logger.info("Agent connector created")
+        logger.info("Agent connector created with MockZapmycoAgent")
 
     async def initialize(self):
         """

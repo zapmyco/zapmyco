@@ -14,10 +14,8 @@ from evaluation.framework.connectors.agent_connector import AgentConnector
 from evaluation.framework.metrics.metric_calculator import MetricCalculator
 from evaluation.framework.utils.dataset_loader import load_dataset
 from evaluation.framework.utils.result_processor import process_results
-from zapmyco.integrations.home_assistant.context_provider import MockContextProvider
-from zapmyco.integrations.home_assistant.mcp import HomeAssistantMCP
-from zapmyco.integrations.home_assistant.client import HomeAssistantClient
-from contextlib import asynccontextmanager
+
+# 移除与 Home Assistant 相关的导入
 
 logger = logging.getLogger(__name__)
 
@@ -59,18 +57,7 @@ class Evaluator:
             f"Evaluator initialized with timeout={self.timeout}s, parallel={self.parallel}"
         )
 
-    @asynccontextmanager
-    async def _get_ha_client(self):
-        """
-        Context manager for handling HomeAssistantClient lifecycle
-        """
-        client = HomeAssistantClient()
-        try:
-            await client.connect()
-            yield client
-        finally:
-            await client.disconnect()
-            await asyncio.sleep(0.1)  # 给予一些时间让资源清理完成
+    # 移除 _get_ha_client 方法，因为我们不需要连接到 Home Assistant
 
     async def run_evaluation(self) -> Dict[str, Any]:
         """
@@ -196,47 +183,35 @@ class Evaluator:
         start_time = time.time()
 
         try:
-            # 设置模拟上下文
-            mock_context = test_case.get("mock_context", {})
-            mock_provider = MockContextProvider(mock_context)
+            # 直接执行测试，不需要设置 Home Assistant 相关的上下文
+            actual_output = await self.agent_connector.send_request(test_case["input"])
 
-            async with self._get_ha_client() as ha_client:
-                # 更新 agent 的 MCP 实例
-                self.agent_connector.agent.ha_mcp = HomeAssistantMCP(
-                    ha_client, context_provider=mock_provider
-                )
+            # 验证结果
+            expected_output = test_case.get("expected_output", {})
+            success, comparison = await self._compare_outputs(
+                expected_output, actual_output
+            )
 
-                # 执行测试
-                actual_output = await self.agent_connector.send_request(
-                    test_case["input"]
-                )
+            # 检查比较结果中的状态
+            comparison_status = "success"
+            for field, field_comparison in comparison.items():
+                if field_comparison.get("status") != "match":
+                    comparison_status = "failed"
+                    break
 
-                # 验证结果
-                expected_output = test_case.get("expected_output", {})
-                success, comparison = await self._compare_outputs(
-                    expected_output, actual_output
-                )
-
-                # 检查比较结果中的状态
-                comparison_status = "success"
-                for field, field_comparison in comparison.items():
-                    if field_comparison.get("status") != "match":
-                        comparison_status = "failed"
-                        break
-
-                result = {
-                    "test_id": test_id,
-                    "category": category,
-                    "description": test_case.get("description", ""),
-                    "status": comparison_status,  # 使用比较结果中的状态
-                    "duration": time.time() - start_time,
-                    "input": test_case.get("input", {}),
-                    "expected_output": expected_output,
-                    "actual_output": actual_output,
-                    "comparison": comparison,
-                    "tags": test_case.get("tags", []),
-                    "difficulty": test_case.get("difficulty", "medium"),
-                }
+            result = {
+                "test_id": test_id,
+                "category": category,
+                "description": test_case.get("description", ""),
+                "status": comparison_status,  # 使用比较结果中的状态
+                "duration": time.time() - start_time,
+                "input": test_case.get("input", {}),
+                "expected_output": expected_output,
+                "actual_output": actual_output,
+                "comparison": comparison,
+                "tags": test_case.get("tags", []),
+                "difficulty": test_case.get("difficulty", "medium"),
+            }
 
         except Exception as e:
             logger.error(f"Error executing test {test_id}: {e}")
@@ -529,24 +504,6 @@ class Evaluator:
             self.agent_connector.close
         ):
             await self.agent_connector.close()
-
-        # 关闭 ZapmycoAgent 的 ha_client
-        if (
-            hasattr(self.agent_connector.agent, "ha_client")
-            and self.agent_connector.agent.ha_client
-        ):
-            await self.agent_connector.agent.ha_client.disconnect()
-
-        # 如果 agent 有 ha_mcp 属性，关闭其对应的 client
-        if (
-            hasattr(self.agent_connector.agent, "ha_mcp")
-            and self.agent_connector.agent.ha_mcp
-        ):
-            if (
-                hasattr(self.agent_connector.agent.ha_mcp, "client")
-                and self.agent_connector.agent.ha_mcp.client
-            ):
-                await self.agent_connector.agent.ha_mcp.client.disconnect()
 
         # 关闭 LLM 服务
         if (
