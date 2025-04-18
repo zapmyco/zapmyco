@@ -182,18 +182,22 @@ async def main():
                 metrics_config=metrics_config,
             )
 
-            # 运行评测
-            results = await evaluator.run_evaluation()
+            try:
+                # 运行评测
+                results = await evaluator.run_evaluation()
 
-            # 生成报告
-            logger.info("Generating evaluation report...")
-            report_generator = ReportGenerator(
-                results,
-                eval_config,
-            )
-            report_path = report_generator.generate()
+                # 生成报告
+                logger.info("Generating evaluation report...")
+                report_generator = ReportGenerator(
+                    results,
+                    eval_config,
+                )
+                report_path = report_generator.generate()
 
-            logger.info(f"Evaluation completed. Report saved to: {report_path}")
+                logger.info(f"Evaluation completed. Report saved to: {report_path}")
+            finally:
+                # 确保资源被正确关闭
+                await evaluator.cleanup()
         else:
             # 如果没有指定操作，显示帮助
             parser.print_help()

@@ -516,6 +516,61 @@ class Evaluator:
 
         logger.info(f"Results saved to {filename}")
 
+    async def cleanup(self) -> None:
+        """
+        清理资源，关闭连接
+
+        在评测完成后调用此方法以确保所有资源被正确关闭
+        """
+        logger.info("正在清理资源...")
+
+        # 关闭 agent connector
+        if hasattr(self.agent_connector, "close") and callable(
+            self.agent_connector.close
+        ):
+            await self.agent_connector.close()
+
+        # 关闭 ZapmycoAgent 的 ha_client
+        if (
+            hasattr(self.agent_connector.agent, "ha_client")
+            and self.agent_connector.agent.ha_client
+        ):
+            await self.agent_connector.agent.ha_client.disconnect()
+
+        # 如果 agent 有 ha_mcp 属性，关闭其对应的 client
+        if (
+            hasattr(self.agent_connector.agent, "ha_mcp")
+            and self.agent_connector.agent.ha_mcp
+        ):
+            if (
+                hasattr(self.agent_connector.agent.ha_mcp, "client")
+                and self.agent_connector.agent.ha_mcp.client
+            ):
+                await self.agent_connector.agent.ha_mcp.client.disconnect()
+
+        # 关闭 LLM 服务
+        if (
+            hasattr(self.agent_connector, "llm_service")
+            and self.agent_connector.llm_service
+        ):
+            if hasattr(self.agent_connector.llm_service, "close") and callable(
+                self.agent_connector.llm_service.close
+            ):
+                await self.agent_connector.llm_service.close()
+            elif (
+                hasattr(self.agent_connector.llm_service, "client")
+                and self.agent_connector.llm_service.client
+            ):
+                if hasattr(
+                    self.agent_connector.llm_service.client, "close"
+                ) and callable(self.agent_connector.llm_service.client.close):
+                    await self.agent_connector.llm_service.client.close()
+
+        # 等待一小段时间确保资源被正确关闭
+        await asyncio.sleep(0.5)
+
+        logger.info("资源清理完成")
+
 
 if __name__ == "__main__":
     excepted_val = {

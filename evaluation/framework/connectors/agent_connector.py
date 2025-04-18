@@ -71,3 +71,14 @@ class AgentConnector:
         except Exception as e:
             logger.warning(f"Health check failed: {e}")
             return False
+
+    async def close(self):
+        """
+        关闭连接并清理资源
+        """
+        logger.info("关闭 Agent Connector...")
+
+        # 如果有其他需要清理的资源，可以在这里添加
+
+        # 标记为未初始化
+        self._initialized = False
