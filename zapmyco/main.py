@@ -1,4 +1,5 @@
 import logging
+import json
 from typing import Optional
 
 from integrations.home_assistant.main import HomeAssistantClient
@@ -96,42 +97,62 @@ class ZapmycoAgent:
             }
 
             # 调用 LLM 获取控制指令
-            return await self.llm_service.get_response(user_input, context)
-            # if not llm_response["success"]:
-            #     return {"success": False, "error": llm_response["error"]}
+            response = await self.llm_service.get_response(user_input, context)
 
-            # 如果没有执行指令，直接返回响应
-            # if None is llm_response["response"]["choices"]:
-            #     return {
-            #         "success": True,
-            #         "message": "No execution required",
-            #         "response": llm_response,
-            #     }
+            if None is response["response"]["choices"]:
+                return response
 
-            # return {
-            #     "success": True,
-            #     "response": llm_response,
-            # }
-            # result = await self.ha_mcp.execute_intent(
-            #     llm_response["response"]["choices"][0]["message"]["tool_calls"][0]
-            # )
+            # 检查是否有工具调用
+            choices = response["response"]["choices"]
+            if not choices or not choices[0].get("message", {}).get("tool_calls"):
+                return response
 
-            # # 构建响应
-            # response = {
-            #     "success": result["success"],
-            #     "message": result.get("message", ""),
-            #     "execution": {
-            #         "device": result.get("device"),
-            #         "action": result.get("action"),
-            #         "service_called": result.get("service_called"),
-            #     },
-            #     "device_state": result.get("new_state"),
-            # }
+            # 获取工具调用
+            tool_calls = choices[0]["message"]["tool_calls"]
 
-            # if not result["success"]:
-            #     response["error"] = result.get("error", "Unknown error")
+            # 处理每个工具调用
+            results = []
+            for tool_call in tool_calls:
+                # 获取工具名称和参数
+                tool_name = tool_call["function"]["name"]
+                tool_args = json.loads(tool_call["function"]["arguments"])
 
-            # return response
+                # 根据工具名称调用对应的 MCP 工具
+                from zapmyco.mcp_servers.home_assistant import MCPHomeAssistant
+
+                try:
+                    # 调用 MCP 工具
+                    result = await MCPHomeAssistant.call_tool(tool_name, tool_args)
+                    results.append(
+                        {
+                            "success": True,
+                            "tool": tool_name,
+                            "args": tool_args,
+                            "result": result,
+                        }
+                    )
+                except Exception as e:
+                    self.logger.error(f"调用工具 {tool_name} 失败: {str(e)}")
+                    results.append(
+                        {
+                            "success": False,
+                            "tool": tool_name,
+                            "args": tool_args,
+                            "error": str(e),
+                        }
+                    )
+
+            # 构建响应
+            final_response = {
+                "success": (
+                    any(result["success"] for result in results) if results else False
+                ),
+                "message": "已处理工具调用",
+                "llm_response": response,
+                "tool_results": results,
+            }
+
+            return final_response
 
         except Exception as e:
             self.logger.error(f"Error processing request: {str(e)}")
@@ -157,26 +178,28 @@ if __name__ == "__main__":
 
         # 示例1: 直接处理文本请求
         print("\n=== 示例1: 直接处理文本请求 ===")
-        text_res = await agent.process_request("关掉小灯")
-        print(f"文本处理结果: {text_res}")
+        res = await agent.process_request("关掉小灯")
 
-        # 示例2: 使用语音输入（需要麦克风）
-        print("\n=== 示例2: 使用语音输入 ===")
-        print("请对着麦克风说话，例如'打开客厅灯'...")
+        # 打印处理结果
+        print(f"处理结果: {res}")
 
-        try:
-            # 启动语音监听
-            await agent.start_voice_listening()
+        # # 示例2: 使用语音输入（需要麦克风）
+        # print("\n=== 示例2: 使用语音输入 ===")
+        # print("请对着麦克风说话，例如'打开客厅灯'...")
 
-            # 监听并处理一次请求
-            voice_res = await agent.listen_and_process()
-            print(f"语音处理结果: {voice_res}")
+        # try:
+        #     # 启动语音监听
+        #     await agent.start_voice_listening()
 
-        finally:
-            # 停止语音监听
-            await agent.stop_voice_listening()
+        #     # 监听并处理一次请求
+        #     voice_res = await agent.listen_and_process()
+        #     print(f"语音处理结果: {voice_res}")
 
-        print("\n处理完成")
+        # finally:
+        #     # 停止语音监听
+        #     await agent.stop_voice_listening()
+
+        # print("\n处理完成")
 
     # 运行主函数
     asyncio.run(main())
